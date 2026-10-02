@@ -126,8 +126,6 @@
     "addressLine2": "Working worldwide",
     "addressLine3": "Mon – Fri, 09:00 – 18:00 GMT",
     "elsewhere": "Elsewhere",
-    "privacy": "Privacy",
-    "terms": "Terms",
     "backToTop": "Back to top",
     "copyright": "codeloop® ©{year}"
   },
@@ -149,10 +147,6 @@
       "based": {
         "label": "Based",
         "value": "Remote — working worldwide"
-      },
-      "availability": {
-        "label": "Currently",
-        "value": "Booking from next month"
       }
     },
     "brief": {

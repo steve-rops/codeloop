@@ -7,18 +7,12 @@ import { CONTACT_EMAIL } from "../lib/site";
 
 const CONTACT = [
   { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
-  { label: "+44 20 7946 0112", href: "tel:+442079460112" },
+  { label: "WhatsApp", href: "https://wa.me/306909417500" },
 ];
 
 const SOCIAL = [
-  { label: "GitHub", href: "https://github.com" },
-  { label: "Dribbble", href: "https://dribbble.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+  { label: "GitHub", href: "https://github.com/steve-rops/" },
 ];
-
-// Both point at the contact page for now; the labels are translated, the
-// destinations are not.
-const LEGAL = ["privacy", "terms"] as const;
 
 export function SiteFooter() {
   const t = useTranslations("footer");
@@ -55,6 +49,10 @@ export function SiteFooter() {
               <li key={item.href} className="mask">
                 <a
                   href={item.href}
+                  {...(item.href.startsWith("http") && {
+                    target: "_blank",
+                    rel: "noreferrer",
+                  })}
                   className="link a-up t-xs"
                   style={stagger(index + 1, 0.05)}
                 >
@@ -111,16 +109,9 @@ export function SiteFooter() {
       <div className="t-xxs mt-[var(--stack-y)] flex items-center justify-between opacity-60">
         {/* Passed as a string: as a number ICU would group it into "2,026". */}
         <span>{t("copyright", { year: String(new Date().getFullYear()) })}</span>
-        <div className="flex gap-[1.5vw]">
-          {LEGAL.map((item) => (
-            <Link key={item} href="/contact" className="link t-xxs">
-              {t(item)}
-            </Link>
-          ))}
-          <a href="#top" className="link t-xxs">
-            {t("backToTop")}
-          </a>
-        </div>
+        <a href="#top" className="link t-xxs">
+          {t("backToTop")}
+        </a>
       </div>
     </Reveal>
   );

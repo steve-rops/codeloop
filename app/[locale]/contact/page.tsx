@@ -19,7 +19,7 @@ export async function generateMetadata(
 
 // The rows are fixed; only their copy is translated, so the keys live here and
 // the label/value pairs come out of the catalogue.
-const DETAILS = ["email", "response", "based", "availability"] as const;
+const DETAILS = ["email", "response", "based"] as const;
 
 export default function ContactPage() {
   const t = useTranslations("contactPage");
@@ -67,7 +67,7 @@ export default function ContactPage() {
             ))}
           </dl>
 
-          <div className="theme-sand a-fade-up mt-[3vw] p-[2vw] max-md:p-6" style={stagger(6, 0.06)}>
+          <div className="theme-sand a-fade-up mt-[3vw] p-[2vw] max-md:p-6" style={stagger(5, 0.06)}>
             <p className="t-s mb-[1vw]">{t.rich("brief.title", italic)}</p>
             <p className="t-p mb-[2vw]">{t("brief.body")}</p>
             <PillButton href="/new">{t("brief.cta")}</PillButton>
