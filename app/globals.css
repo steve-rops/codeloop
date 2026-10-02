@@ -1,26 +1,709 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ---------------------------------------------------------------------------
+   Tokens
+   The palette, type stack and easing curves the whole site is tuned to. The
+   easings are the load-bearing ones: `circ` drives every masked reveal, `fade`
+   is deliberately back-loaded so opacity trails the transform instead of
+   racing it, and `mask` runs the full-screen clip-path wipes.
+--------------------------------------------------------------------------- */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-paper: #fafafa;
+  --color-ink: #2a2a2a;
+  --color-sand: #ccc4b9;
+  --color-grey: #f0f0f0;
+  --color-dark: #0f0f0f;
+  --color-muted: #949494;
+  --color-hairline: #d6d6d6;
+  --color-sage: #bcbcb4;
+  --color-danger: #b3402f;
+  --color-loop-cyan: #06b6d4;
+  --color-loop-violet: #a855f7;
+
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+
+  --ease-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+  --ease-mask: cubic-bezier(0.24, 0.36, 0, 1);
+  --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-fade: cubic-bezier(0.075, 0, 0.165, 0);
+  --ease-smooth: cubic-bezier(0.4, 0.4, 0.1, 1);
+  --ease-draw: cubic-bezier(0.3, 0.3, 0, 1);
+  --ease-inout: cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-@media (prefers-color-scheme: dark) {
+@theme {
+  /* Every measurement on the site is a fraction of the viewport, so the layout
+     scales as one object rather than snapping between breakpoints. */
+  --gutter: 2vw;
+  --nav-h: 55px;
+
+  /* Vertical rhythm.
+     One scale for the whole page, so a section's breathing room, the gap
+     between its head and its body, and the height of a list row all move
+     together. The steps stay in viewport units, but they are re-cut at each
+     breakpoint rather than left to scale linearly: a tenth of the viewport is
+     a room on a desktop and a hairline on a phone, and type does not shrink at
+     the same rate as the screen. */
+  --section-y: 11vw; /* clear space above a section */
+  --block-y: 3vw; /* a section's head to its body */
+  --stack-y: 1.1vw; /* stacked lines inside one block */
+  --tight-y: 0.55vw; /* dense list rows */
+  --row-y: 1.7vw; /* padding inside a full-width list row */
+  --card-h: 24vw; /* work grid visual */
+  --card-h-sm: 20vw;
+}
+
+/* Tablet: the grid still holds, but the type has already stepped up, so the
+   space around it has to step up with it. */
+@media screen and (max-width: 914px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --section-y: 14vw;
+    --block-y: 4vw;
+    --stack-y: 1.6vw;
+    --tight-y: 0.8vw;
+    --row-y: 2.4vw;
+    --card-h: 34vw;
+    --card-h-sm: 30vw;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Phone: everything stacks into one column, so the only thing left to tell one
+   section from the next is the space between them. The ratios open up hard —
+   roughly double the desktop fraction — which lands them back at the same
+   optical size as the desktop layout rather than a scaled-down copy of it. */
+@media screen and (max-width: 480px) {
+  :root {
+    --section-y: 21vw;
+    --block-y: 6.5vw;
+    --stack-y: 3vw;
+    --tight-y: 1.4vw;
+    --row-y: 4.2vw;
+    --card-h: 60vw;
+    --card-h-sm: 52vw;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: none;
+    text-rendering: geometricPrecision;
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none;
+    overscroll-behavior: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+    width: 0;
+  }
+
+  body {
+    max-width: 100vw;
+    overscroll-behavior: none;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  ::selection {
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+
+  /* Lenis takes over the scroll, so the document can no longer be the thing
+     that has a fixed height. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: clip;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Type scale
+   Uppercase grotesk set tight and flush: the negative `margin-left` cancels the
+   left side-bearing that `letter-spacing` leaves behind, so headings optically
+   align to the grid instead of sitting a hair inside it.
+
+   Two registers, and every step has to be legible against its neighbours:
+
+     labels   t-xxs / t-xs  — uppercase, *positively* tracked, fixed px
+     body     t-p           — lowercase, light, fluid between two bounds
+     display  t-s … t-xl    — uppercase, negatively tracked, fluid
+
+   The label sizes stay under the body size on purpose. Tracking is what makes
+   that work: small uppercase set with the display's tight negative spacing
+   jams together, so the two label steps run positive instead — which also
+   stops a label reading as body copy that happens to be shouting.
+
+   Between the display steps the ratio holds near 1.4, so a section title, a
+   row title and a caption inside that row are never within a hair of each
+   other's size. Before, the whole small end collapsed onto a flat 14px: an
+   eyebrow, a paragraph and a spec list all measured the same and the hierarchy
+   had to be inferred from position alone. */
+@layer components {
+  .t-xxs,
+  .t-xs,
+  .t-s,
+  .t-m,
+  .t-ml,
+  .t-l,
+  .t-xl {
+    margin-block: 0;
+    margin-left: -0.03em;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  /* Positive tracking, so no side-bearing to cancel. */
+  .t-xxs,
+  .t-xs {
+    margin-left: 0;
+  }
+
+  .t-xxs {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .t-xs {
+    font-size: 13px;
+    letter-spacing: 0.035em;
+  }
+  .t-s {
+    font-size: clamp(17px, 1.3vw, 22px);
+    line-height: 1.05;
+  }
+  .t-m {
+    font-size: 2.2vw;
+  }
+  .t-ml {
+    font-size: 3.1vw;
+    line-height: 0.88;
+  }
+  .t-l {
+    font-size: 4.1vw;
+    line-height: 0.82;
+  }
+  .t-xl {
+    font-size: 6.2vw;
+    line-height: 0.84;
+  }
+
+  /* Body copy is the one thing that stays light and lowercase. It is bounded
+     rather than free: paragraphs set in vw alone are unreadably small on a
+     laptop and absurd on a 32" display, so it only moves between 15 and 18px
+     while the display steps keep scaling past it. */
+  .t-p {
+    margin-top: 0;
+    font-size: clamp(15px, 1.05vw, 18px);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  .t-p p {
+    margin-bottom: 0.7em;
+  }
+  .t-p :last-child {
+    margin-bottom: 0;
+  }
+  .t-p .regular {
+    font-weight: 600;
+  }
+
+  /* The signature move: a serif italic word dropped into an uppercase grotesk
+     headline. Sized in `em` so it stays at the reference's ~78% of whatever it
+     sits inside, at every breakpoint, without a single hard-coded pairing. */
+  .t-italic {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.78em;
+    letter-spacing: -0.06em;
+    padding-right: 0.08em;
+  }
+
+  /* Instrument Serif has no Greek glyphs, so on /el the accent word would fall
+     back to a system serif that clashes with the headline. Set it in the
+     headline's own face instead. */
+  :lang(el) .t-italic {
+    font: inherit;
+    letter-spacing: inherit;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 914px) {
+  /* `.t-s` is already held at its lower bound by the clamp here, so it is the
+     display steps above it that have to step up to keep the ratios. */
+  .t-m {
+    font-size: 3.4vw;
+  }
+  .t-ml {
+    font-size: 4.4vw;
+  }
+  .t-l {
+    font-size: 5.2vw;
+  }
+  .t-xl {
+    font-size: 7.6vw;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .t-s {
+    font-size: 4.6vw;
+    line-height: 1.1;
+  }
+  .t-m {
+    font-size: 6vw;
+    line-height: 1.05;
+  }
+  .t-ml {
+    font-size: 7.2vw;
+    line-height: 0.9;
+  }
+  .t-l {
+    font-size: 8.6vw;
+    line-height: 0.92;
+  }
+  .t-xl {
+    font-size: 10.5vw;
+    line-height: 0.92;
+  }
+  .t-p {
+    font-size: 16px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Reveal primitives
+   A section wrapper gets `.is-inview` once the IntersectionObserver fires; every
+   descendant then runs its own primitive, offset by an inline `--d` stagger.
+   The transition lives on the resting class rather than the active one so an
+   element that starts in view still animates rather than snapping.
+--------------------------------------------------------------------------- */
+@layer components {
+  /* Clips the travel of `.a-up` / `.a-down` children. */
+  .mask {
+    overflow: hidden;
+    display: block;
+  }
+
+  .a-up {
+    transform: translateY(120%);
+    transition: transform 1.5s var(--ease-circ);
+  }
+  .is-inview .a-up {
+    transform: translateY(0);
+    transition-delay: var(--d, 0s);
+  }
+
+  .a-down {
+    transform: translateY(-120%);
+    transition: transform 1.5s var(--ease-circ);
+  }
+  .is-inview .a-down {
+    transform: translateY(0);
+    transition-delay: var(--d, 0s);
+  }
+
+  .a-fade-up {
+    opacity: 0;
+    transform: translateY(80%);
+    transition:
+      opacity 1s var(--ease-fade),
+      transform 1.5s var(--ease-circ);
+  }
+  .is-inview .a-fade-up {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--d, 0s);
+  }
+
+  /* The image reveal: oversized and canted, settling square inside its mask. */
+  .a-fade-rotate {
+    opacity: 0;
+    transform: scale(1.3) rotate(8deg);
+    transition:
+      opacity 1s var(--ease-fade),
+      transform 1.5s var(--ease-circ);
+  }
+  .is-inview .a-fade-rotate {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: var(--d, 0s);
+  }
+
+  /* Media travelling slower than the copy beside it, for a parallax read. */
+  .a-up-img {
+    transform: translateY(120%);
+    transition: transform 2.4s var(--ease-smooth);
+  }
+  .is-inview .a-up-img {
+    transform: translateY(0);
+    transition-delay: var(--d, 0s);
+  }
+
+  /* Hairline rules that draw themselves in rather than fading. */
+  .a-fill-w {
+    width: 0;
+    transition: width 1s var(--ease-draw);
+  }
+  .is-inview .a-fill-w {
+    width: 100%;
+    transition-delay: var(--d, 0s);
+  }
+
+  .a-fill-h {
+    height: 0;
+    transition: height 6s var(--ease-draw);
+  }
+  .is-inview .a-fill-h {
+    height: 100%;
+    transition-delay: var(--d, 0s);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero scrim
+   The opening copy sits over live footage, so it gets its own ground: a sheet
+   of paper tint with the backdrop blurred behind it. The fade is done with a
+   mask rather than with the tint's alpha, because alpha only thins the colour
+   — the blur itself would run edge to edge and cut a visible seam. Masking the
+   layer dissolves tint and blur together, so the footage comes back sharp on
+   the right where there is no type, and the sheet never meets the nav or the
+   section below it on a hard edge.
+--------------------------------------------------------------------------- */
+@layer components {
+  .hero-scrim {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-paper) 72%, transparent),
+      color-mix(in srgb, var(--color-paper) 42%, transparent) 55%,
+      transparent
+    );
+    backdrop-filter: blur(22px) saturate(1.15);
+    --scrim-x: linear-gradient(
+      to right,
+      #000 40%,
+      rgba(0, 0, 0, 0.55) 70%,
+      transparent 88%
+    );
+    --scrim-y: linear-gradient(
+      to bottom,
+      transparent,
+      #000 10%,
+      #000 84%,
+      transparent
+    );
+    mask-image: var(--scrim-x), var(--scrim-y);
+    mask-composite: intersect;
+  }
+}
+
+/* The description sits out at column five, past where the sheet has thinned —
+   and that is also where the loop is at its busiest. Rather than dragging the
+   whole sheet across the frame and flattening the footage, this block carries
+   its own patch of ground: an ellipse of the same tint and blur, fading out
+   well before it reaches an edge, so it reads as the copy resting on something
+   rather than as a panel drawn behind it. */
+@layer components {
+  .hero-scrim-patch {
+    background-image: radial-gradient(
+      75% 75% at 45% 50%,
+      color-mix(in srgb, var(--color-paper) 62%, transparent),
+      transparent 100%
+    );
+    backdrop-filter: blur(18px) saturate(1.15);
+    mask-image: radial-gradient(70% 70% at 45% 50%, #000 30%, transparent 100%);
+  }
+}
+
+/* Narrow screens run the copy the full width of the grid, so the sheet has to
+   cover the whole frame rather than fading out beside the type. */
+@media screen and (max-width: 914px) {
+  .hero-scrim {
+    --scrim-x: linear-gradient(
+      to right,
+      #000 75%,
+      rgba(0, 0, 0, 0.7) 92%,
+      transparent
+    );
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Work panels
+   The grid ran edge to edge, which read as one long piece of artwork rather
+   than as four separate projects. Each entry now sits on its own sheet: a
+   hairline border, a tint a shade off the paper, and the backdrop blurred
+   behind it, so a card separates from the page and from its neighbours without
+   introducing a second colour. Hover firms the border to ink and lifts the
+   sheet a hair — the same vocabulary as the rules drawn elsewhere on the page.
+--------------------------------------------------------------------------- */
+@layer components {
+  .project-panel {
+    position: relative;
+    padding: var(--stack-y);
+    border: 1px solid var(--color-hairline);
+    border-radius: 6px;
+    background-color: color-mix(in srgb, var(--color-grey) 72%, transparent);
+    backdrop-filter: blur(16px) saturate(1.08);
+    transition:
+      border-color 0.6s var(--ease-circ),
+      background-color 0.6s var(--ease-circ),
+      box-shadow 0.8s var(--ease-circ),
+      transform 0.8s var(--ease-circ);
+  }
+
+  .group:hover .project-panel {
+    border-color: var(--color-ink);
+    background-color: color-mix(in srgb, var(--color-grey) 94%, transparent);
+    box-shadow: 0 18px 44px -30px
+      color-mix(in srgb, var(--color-ink) 55%, transparent);
+    transform: translateY(-4px);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Links & buttons
+--------------------------------------------------------------------------- */
+@layer components {
+  /* Underline sweeps out to the right, then back in from the left, so hovering
+     across a list reads as one continuous gesture. */
+  .link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .link::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: bottom right;
+    transition: transform 0.3s;
+  }
+  .link:hover::after,
+  .link[data-active="true"]::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
+  .link-body {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-sand);
+    transition: text-decoration-color 0.3s;
+  }
+  .link-body:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Two stacked copies of the label inside a fixed-height mask; on hover the
+     pair rolls up so the incoming text arrives as the outgoing one leaves. */
+  .btn {
+    --btn-pad: 4px 12px;
+    display: inline-block;
+    user-select: none;
+    line-height: 14px;
+  }
+  .btn-inner {
+    position: relative;
+    /* Must be a block box: `overflow` has no effect on an inline one, and
+       without the clip both label layers render at once. */
+    display: inline-block;
+    overflow: hidden;
+    border-radius: 999px;
+  }
+  .btn-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    /* The ghost copy already sizes the pill, so each moving layer just centres
+       its label in that box rather than re-applying the padding. */
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    transition: transform 0.5s var(--ease-mask);
+  }
+  .btn-top {
+    background-color: var(--color-ink);
+    color: var(--color-grey);
+  }
+  .btn-bottom {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+    transform: translateY(100%);
+  }
+  .btn:hover .btn-top {
+    transform: translateY(-100%);
+  }
+  .btn:hover .btn-bottom {
+    transform: translateY(0);
+  }
+  /* An invisible copy holds the pill open at the label's natural width. */
+  .btn-ghost {
+    position: relative;
+    display: block;
+    visibility: hidden;
+    padding: var(--btn-pad);
+  }
+  .btn-text {
+    font-size: 12px;
+    line-height: 14px;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .on-dark .btn-top {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+  }
+  .on-dark .btn-bottom {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .btn {
+    --btn-pad: 5px 14px;
+  }
+  .btn-text {
+    font-size: 14px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Layout helpers
+--------------------------------------------------------------------------- */
+@layer components {
+  .gutter {
+    margin-inline: var(--gutter);
+  }
+
+  .col-8 {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    column-gap: var(--gutter);
+  }
+
+  theme-grey {
+    background-color: var(--color-grey);
+    color: var(--color-ink);
+  }
+  .theme-sand {
+    background-color: var(--color-sand);
+    color: var(--color-ink);
+  }
+  .theme-dark {
+    background-color: var(--color-dark);
+    color: var(--color-sand);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  :root {
+    --gutter: 4vw;
+  }
+  .col-8 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion opt-out
+   Everything above is layered on top of a legible resting state, so disabling
+   motion is a matter of dropping the offsets rather than re-styling anything.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .a-up,
+  .a-down,
+  .a-fade-up,
+  .a-fade-rotate,
+  .a-up-img,
+  .is-inview .a-up,
+  .is-inview .a-down,
+  .is-inview .a-fade-up,
+  .is-inview .a-fade-rotate,
+  .is-inview .a-up-img {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .a-fill-w,
+  .is-inview .a-fill-w {
+    width: 100%;
+    transition: none;
+  }
+
+  .a-fill-h,
+  .is-inview .a-fill-h {
+    height: 100%;
+    transition: none;
+  }
+
+  .project-panel,
+  .group:hover .project-panel {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Page transition
+   Covering is a pure slide — the clip snaps open with a 0s transition so the
+   panel arrives as one solid sheet. Clearing animates clip and transform
+   together, which reads as the panel being pulled off the top rather than
+   merely leaving. Resting has no transition at all, so the reset after a
+   navigation is instant and invisible.
+--------------------------------------------------------------------------- */
+.page-transition {
+  transform: translateY(110%);
+  clip-path: inset(0 0 110% 0);
+  transition: none;
+  will-change: transform, clip-path;
+}
+
+.page-transition[data-phase="covering"] {
+  transform: translateY(0);
+  clip-path: inset(0 0 0 0);
+  transition:
+    transform 1s var(--ease-mask),
+    clip-path 0s var(--ease-mask);
+}
+
+.page-transition[data-phase="clearing"] {
+  transform: translateY(-10%);
+  clip-path: inset(0 0 110% 0);
+  transition:
+    transform 1s var(--ease-mask),
+    clip-path 1s var(--ease-mask);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    display: none;
+  }
 }

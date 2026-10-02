@@ -1,0 +1,467 @@
+{
+  "metadata": {
+    "home": {
+      "title": "codeloop — web design & development",
+      "description": "A freelance studio designing and building websites that feel as good to use as they look — for startups, brands, and everything between."
+    },
+    "work": {
+      "title": "Work — codeloop",
+      "description": "Selected projects from codeloop — e-commerce storefronts, SaaS products, brand systems, and web apps."
+    },
+    "contact": {
+      "title": "Contact — codeloop",
+      "description": "Get in touch with codeloop about a website, web app, or brand system."
+    },
+    "new": {
+      "title": "Start a project — codeloop",
+      "description": "Answer a few short questions about your project and we'll come back with a plan, a timeline, and a number."
+    },
+    "project": {
+      "title": "{client} — codeloop",
+      "notFound": "Not found — codeloop"
+    }
+  },
+  "nav": {
+    "tagline": "— web design & development",
+    "services": "Services",
+    "work": "Work",
+    "contact": "Contact",
+    "cta": "Start a project",
+    "menuOpen": "Menu +",
+    "menuClose": "Close —"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "en": "EN",
+    "el": "EL"
+  },
+  "hero": {
+    "line1": "Web design & development",
+    "line2": "",
+    "role": "Freelance studio",
+    "location": "Remote, worldwide",
+    "lead": "We design and build websites that feel as good to use as they look.",
+    "cta": "Start a project"
+  },
+  "services": {
+    "eyebrow": "01 — Services",
+    "titleLine1": "Research, design, branding, development and support",
+    "body": "We work as one team across strategy, design and build. No handoffs between agencies, no translation losses, no waiting on someone else's sprint.",
+    "cta": "Start a project",
+    "items": {
+      "design": {
+        "title": "Web design",
+        "desc": "Interfaces that look sharp and convert — from landing pages to full product design."
+      },
+      "development": {
+        "title": "Development",
+        "desc": "Fast, accessible builds in modern frameworks, shipped and maintained end to end."
+      },
+      "brand": {
+        "title": "Brand systems",
+        "desc": "Design systems and identity work that keep every surface consistent as you grow."
+      }
+    }
+  },
+  "workSection": {
+    "eyebrow": "02 — Selected work",
+    "allWork": "All work →"
+  },
+  "engagements": {
+    "eyebrow": "03 — How we work",
+    "more": "More +",
+    "less": "Less —",
+    "items": {
+      "discovery": {
+        "name": "Discovery sprint",
+        "duration": "2 weeks",
+        "tags": "Research — Strategy",
+        "body": "A fixed-scope fortnight to work out what should actually be built. You come away with a sitemap, a content model, wireframes for the pages that carry the load, and a build estimate that holds up.",
+        "includes": {
+          "0": "Stakeholder interviews",
+          "1": "Competitive teardown",
+          "2": "Wireframes",
+          "3": "Scoped estimate"
+        }
+      },
+      "build": {
+        "name": "Design and build",
+        "duration": "6 – 12 weeks",
+        "tags": "Design — Development",
+        "body": "The full engagement. Design and code advance together in weekly increments, so you are reviewing working pages in a browser from week two rather than approving flat comps and hoping.",
+        "includes": {
+          "0": "Design system",
+          "1": "Full front-end build",
+          "2": "CMS integration",
+          "3": "Launch and handover"
+        }
+      },
+      "partner": {
+        "name": "Ongoing partner",
+        "duration": "Monthly",
+        "tags": "Design — Development — Support",
+        "body": "A standing allocation for teams that ship continuously. Campaign pages, new sections, performance work and the accumulated small things that never quite justify their own project.",
+        "includes": {
+          "0": "Reserved capacity",
+          "1": "Priority turnaround",
+          "2": "Quarterly review",
+          "3": "Direct line"
+        }
+      }
+    }
+  },
+  "contactSection": {
+    "eyebrow": "04 — Get in touch",
+    "titleLine1": "Got a project",
+    "titleLine2": "in <i>mind</i>?",
+    "body": "Tell us a bit about it and we'll get back within a day — or <brief>walk through the brief</brief> if you'd rather answer a few questions."
+  },
+  "footer": {
+    "ctaLine1": "Have something",
+    "ctaLine2": "in <i>mind</i>? →",
+    "ctaCursor": "Let's talk",
+    "contact": "Contact",
+    "studio": "Studio",
+    "addressLine1": "Remote-first",
+    "addressLine2": "Working worldwide",
+    "addressLine3": "Mon – Fri, 09:00 – 18:00 GMT",
+    "elsewhere": "Elsewhere",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "backToTop": "Back to top",
+    "copyright": "codeloop® ©{year}"
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "title": "Let's <i>talk</i> about it.",
+    "intro": "Send a note and you'll hear back from a person within a working day — no forms disappearing into a void.",
+    "step01": "01 — Send a message",
+    "step02": "02 — The details",
+    "details": {
+      "email": {
+        "label": "Email",
+        "value": "topsstefanos@gmail.com"
+      },
+      "response": {
+        "label": "Response time",
+        "value": "Within one working day"
+      },
+      "based": {
+        "label": "Based",
+        "value": "Remote — working worldwide"
+      },
+      "availability": {
+        "label": "Currently",
+        "value": "Booking from next month"
+      }
+    },
+    "brief": {
+      "title": "Know what you <i>need</i>?",
+      "body": "Walk through five short questions instead and we'll come back with a plan, a timeline, and a number.",
+      "cta": "Start a project →"
+    }
+  },
+  "workPage": {
+    "eyebrow": "Selected work — {count}",
+    "title": "Things we shipped, and what changed after.",
+    "intro": "A few recent projects. Every one of them started as a conversation about a number that wasn't moving.",
+    "ctaLine1": "Yours could be",
+    "ctaLine2": "<i>next</i>.",
+    "ctaBody": "Answer five short questions and we'll come back with a plan, a timeline, and a number.",
+    "cta": "Start a project →"
+  },
+  "newPage": {
+    "eyebrow": "Start a project",
+    "title": "Five questions. <i>Two</i> minutes.",
+    "intro": "Enough for us to come back with something useful instead of “let's set up a call to learn more.”"
+  },
+  "projectPage": {
+    "back": "← All work",
+    "role": "Role",
+    "duration": "Duration",
+    "stack": "Stack",
+    "website": "Website",
+    "problem": "01 — The problem",
+    "approach": "02 — What we did",
+    "results": "03 — What changed",
+    "nextProject": "Next project",
+    "cta": "Start a project",
+    "viewCase": "View case",
+    "inDevelopment": "Under development"
+  },
+  "categories": {
+    "ecommerce": "E-commerce",
+    "saas": "SaaS",
+    "brand": "Brand",
+    "webapp": "Web app"
+  },
+  "form": {
+    "name": "Your name",
+    "email": "Email address",
+    "message": "A little about your project",
+    "sending": "Sending…",
+    "submit": "Reach out →",
+    "successTitle": "Thanks — <i>sent</i>.",
+    "successBody": "We'll reply to {email} shortly."
+  },
+  "errors": {
+    "nameRequired": "Please enter your name.",
+    "emailRequired": "Please enter your email.",
+    "emailInvalid": "That email looks off.",
+    "messageRequired": "Tell us a bit about the project.",
+    "projectTypeRequired": "Pick what you're building.",
+    "budgetRequired": "Pick a budget range.",
+    "timelineRequired": "Pick a timeline.",
+    "briefRequired": "A couple of sentences is plenty.",
+    "pickOneToContinue": "Pick one to continue.",
+    "pickRangeToContinue": "Pick a range to continue.",
+    "pickTimelineToContinue": "Pick a timeline to continue.",
+    "briefRejected": "Something in the brief didn't check out — step back through and try again.",
+    "sendFailed": "We couldn't send that just now — please try again in a moment, or email us directly."
+  },
+  "brief": {
+    "progress": "Step {current} of {total}",
+    "progressLabel": "Brief progress",
+    "steps": {
+      "0": {
+        "title": "What are we building?",
+        "hint": "Pick the closest fit."
+      },
+      "1": {
+        "title": "What does it need to do?",
+        "hint": "Pick any that apply — or none."
+      },
+      "2": {
+        "title": "What's the budget?",
+        "hint": "A range is fine. It shapes the scope."
+      },
+      "3": {
+        "title": "When do you need it?",
+        "hint": "Honest answers beat optimistic ones."
+      },
+      "4": {
+        "title": "And who are you?",
+        "hint": "So we know where to send the reply."
+      },
+      "5": {
+        "title": "Does this look right?",
+        "hint": "Change anything before it sends."
+      }
+    },
+    "projectTypes": {
+      "marketing-site": {
+        "label": "Marketing site",
+        "hint": "A site that explains and sells what you do."
+      },
+      "web-app": {
+        "label": "Web app",
+        "hint": "Accounts, dashboards, tools people log into."
+      },
+      "e-commerce": {
+        "label": "E-commerce",
+        "hint": "Selling products or subscriptions online."
+      },
+      "redesign": {
+        "label": "Redesign",
+        "hint": "Something exists — it needs to be better."
+      },
+      "not-sure": {
+        "label": "Something else",
+        "hint": "Tell us about it in your own words."
+      }
+    },
+    "features": {
+      "cms": "CMS / editable content",
+      "auth": "Accounts & auth",
+      "payments": "Payments or subscriptions",
+      "dashboard": "Dashboard & analytics",
+      "editorial": "Blog or editorial",
+      "motion": "Motion & animation",
+      "seo": "SEO & performance",
+      "i18n": "Multi-language",
+      "integrations": "Third-party integrations",
+      "designSystem": "Design system"
+    },
+    "budgets": {
+      "under-5k": "Under $5k",
+      "5-15k": "$5k – $15k",
+      "15-40k": "$15k – $40k",
+      "40k-plus": "$40k+",
+      "unsure": "Not sure yet"
+    },
+    "timelines": {
+      "asap": "As soon as possible",
+      "1-3-months": "1 – 3 months",
+      "3-6-months": "3 – 6 months",
+      "flexible": "Flexible / exploring"
+    },
+    "fields": {
+      "company": "Company (optional)",
+      "brief": "Anything else we should know?",
+      "briefPlaceholder": "What you're trying to do, what's in the way, anything you've already tried."
+    },
+    "summary": {
+      "project": "Project",
+      "needs": "Needs",
+      "budget": "Budget",
+      "timeline": "Timeline",
+      "contact": "Contact",
+      "brief": "In your words",
+      "empty": "Nothing specified",
+      "edit": "Edit"
+    },
+    "back": "← Back",
+    "next": "Next →",
+    "skip": "Skip this →",
+    "send": "Send the brief →",
+    "sending": "Sending…",
+    "success": {
+      "eyebrow": "Brief received",
+      "title": "That's everything we need.",
+      "body": "We'll read it properly and reply to {email} within a working day — usually with a couple of questions and a rough shape for the project.",
+      "link": "Look at the work while you wait →"
+    }
+  },
+  "projects": {
+    "Marvelcars": {
+      "client": "Marvelcarsrentals",
+      "title": "27 luxury cars, picked and reserved in minutes",
+      "summary": "A bilingual rental site for Marvel Cars Athens: fleet, day rates and handover points laid out so a visitor picks a car and reserves it in minutes.",
+      "role": "Design & development",
+      "duration": "2 months",
+      "challenge": "Marvel Cars hires out 27 luxury and performance cars from three points on the Athens Riviera, and most customers arrive by plane or ferry and book from a phone. The site had to show the right car, its real all-in price and where to collect it in two languages, without a developer in the loop every time the fleet changed.",
+      "tags": {
+        "0": "Web design",
+        "1": "Development",
+        "2": "Headless CMS"
+      },
+      "approach": {
+        "0": "Modelled the fleet in Sanity so cars, categories, day rates and photos are edited by the team, not by us.",
+        "1": "Grouped the fleet into SUVs, sportscars and daily rentals, with VAT, collision cover and liability shown in the price up front.",
+        "2": "Built the whole site in English and Greek, with its own route and metadata per language.",
+        "3": "Added landing pages for airport arrivals, ferry ports, the Riviera, weddings and corporate hire, each ending in the same reservation flow."
+      },
+      "results": {
+        "0": {
+          "label": "Rental inquiries a day",
+          "value": "1–2 → 10+"
+        },
+        "1": {
+          "label": "Time to publish a new car",
+          "value": "5 minutes"
+        }
+      }
+    },
+    "Karatheodoris": {
+      "client": "Nea Vyssa Cultural Association",
+      "title": "Two museums, a dance school and a calendar, in two languages",
+      "summary": "A bilingual site for the Cultural Association of Nea Vyssa «Stefanos Karatheodoris»: its events, its two museums and online booking for the Folklore Museum, in Greek and English.",
+      "role": "Design & development",
+      "duration": "2 months",
+      "challenge": "Since 1977 the association has kept the memory of the Karatheodoris family and the traditions of Nea Vyssa alive, through the Carathéodory Museum, the Folklore Museum, three dance departments and a year-round programme of events. Visitors come from Greece and abroad, so everything had to read in both languages, the volunteers running it needed to post events and change the homepage themselves, and museum visits had to be bookable online.",
+      "tags": {
+        "0": "Web design",
+        "1": "Development",
+        "2": "Headless CMS",
+        "3": "Bilingual"
+      },
+      "approach": {
+        "0": "Built the whole site in Greek and English, with its own route and metadata per language.",
+        "1": "Modelled events and the homepage slides in Sanity, so the association publishes its calendar and changes the hero photos without us.",
+        "2": "Gave the Carathéodory Museum and the Folklore Museum their own pages, each with its history and collection.",
+        "3": "Added a booking system for the Folklore Museum covering individual visits, group and school visits and guided tours, emailing the association and confirming to the visitor."
+      },
+      "results": {
+        "0": {
+          "label": "Museum visits booked online",
+          "value": "0 → 100%"
+        },
+        "1": {
+          "label": "Time to publish an event",
+          "value": "2 minutes"
+        }
+      }
+    },
+    "DKExecutive": {
+      "client": "DK Executive",
+      "title": "Chauffeured transfers and tours across Athens, booked in four steps",
+      "summary": "A bilingual site for DK Executive, a luxury transfer service in Athens: six services, seven tours and a Mercedes fleet, all leading into one booking form.",
+      "role": "Design & development",
+      "duration": "2 months",
+      "challenge": "DK Executive drives visitors around Athens around the clock, from airport pickups and weddings to corporate hire and day trips to Delphi, Meteora and Cape Sounion. Most of its customers are travellers booking from abroad, often from a phone, so the site had to read in English and Greek, show the fleet honestly, and take a full journey (pickup, drop-off, flight number, passengers) without a back-and-forth by email.",
+      "tags": {
+        "0": "Web design",
+        "1": "Development",
+        "2": "Booking flow",
+        "3": "Bilingual"
+      },
+      "approach": {
+        "0": "Built the whole site in English and Greek, with its own route and metadata per language.",
+        "1": "Designed a four-step booking form (itinerary, vehicle, details, confirm) covering transfers, tours and hourly disposal.",
+        "2": "Used the Google Maps API to autocomplete pickup and drop-off addresses, so every request arrives with a real location.",
+        "3": "Gave each of the six services and seven tours, from Athens by Night to Meteora, its own page ending in the same booking flow, and laid out the five Mercedes vehicles by passenger count."
+      },
+      "results": {
+        "0": {
+          "label": "Google rating",
+          "value": "5.0 from 47 reviews"
+        },
+        "1": {
+          "label": "Bookings taken online",
+          "value": "24/7"
+        }
+      }
+    },
+    "Principal": {
+      "client": "Principal Catering",
+      "title": "A wedding hall, an estate and 9,000 meals a day, on one site",
+      "summary": "A bilingual site for Principal, a wedding hall and catering company in Orestiada: two venues, four catering services, its certifications and international registrations, all leading to one quote form.",
+      "role": "Design & development",
+      "duration": "2 months",
+      "challenge": "Principal has catered in Evros since 2007 and does two quite different jobs from the same kitchen: weddings and receptions at its 700-guest hall and 1,000-guest estate, and contract catering (school meals, industrial catering, operational support) with a capacity of 9,000 meals a day. A couple choosing a venue and a procurement officer vetting a supplier both had to find what they came for, in Greek and English, and reach the company with one request.",
+      "tags": {
+        "0": "Web design",
+        "1": "Development",
+        "2": "Bilingual"
+      },
+      "approach": {
+        "0": "Built the whole site in Greek and English, with its own route and metadata per language.",
+        "1": "Presented the Principal Hall and the Principal Estate side by side on a venues page, each with its capacity and setting, so a couple can compare indoors and outdoors at a glance.",
+        "2": "Laid out the four services (school meals, industrial catering, event catering and operational support) on a page of their own, so institutional buyers aren't reading a wedding brochure.",
+        "3": "Gave the ISO 9001, ISO 45001 and ISO 27001 certifications and the D-U-N-S, NCAGE and SAM registrations their own pages, so a buyer can check the company's credentials directly.",
+        "4": "Kept an “Ask for a Quote” button in the navigation of every page, leading to one form that takes the event date and type, so each request arrives with what the team needs to price it."
+      },
+      "results": {
+        "0": {
+          "label": "Quote requests taken online",
+          "value": "24/7"
+        },
+        "1": {
+          "label": "Site languages",
+          "value": "Greek & English"
+        }
+      }
+    },
+    "Evresis": {
+      "client": "Evresis",
+      "title": "Property across northern Evros, searched from one bar",
+      "summary": "A bilingual site for Evresis, a real estate agency in Orestiada: homes, commercial spaces and land for sale and rent, alongside the office's print works and building management. Currently in development.",
+      "role": "Design & development",
+      "duration": "In progress",
+      "challenge": "Evresis sells and lets homes, commercial spaces and land in Nea Orestiada, Didymoteicho, Soufli and the villages of northern Evros, and runs a print works and a building management service from the same office. The site has to let a buyer or tenant narrow the portfolio by area, type and price in one step, give the two other services room of their own, and leave the agency able to publish and retire listings without a developer.",
+      "tags": {
+        "0": "Web design",
+        "1": "Development",
+        "2": "Headless CMS",
+        "3": "Bilingual"
+      },
+      "approach": {
+        "0": "Built the whole site in Greek and English, with its own route and metadata per language.",
+        "1": "Put one search bar in the hero (sale or rent, area, property type, price range), so the portfolio is filtered before the first scroll.",
+        "2": "Set that search over a Mapbox map of Orestiada, so the agency's own streets are the first thing a visitor sees.",
+        "3": "Modelled the listings in Sanity, so the agency adds, edits and retires properties itself.",
+        "4": "Gave the print works and building management their own pages, so the office's two other services aren't buried under the listings."
+      }
+    }
+  }
+}
