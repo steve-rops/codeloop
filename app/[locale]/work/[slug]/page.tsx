@@ -8,6 +8,9 @@ import { Reveal } from "@/app/components/reveal";
 import { delay, stagger } from "@/app/lib/motion";
 import { messagesList } from "@/app/lib/messages-list";
 import { getProject, PROJECTS } from "@/app/lib/projects";
+import { pageMetadata, pageUrl } from "@/app/lib/seo";
+import { SITE_NAME, SITE_URL } from "@/app/lib/site";
+import { JsonLd } from "@/app/components/json-ld";
 import type { Locale } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -25,10 +28,15 @@ export async function generateMetadata(
 
   const p = await getTranslations({ locale, namespace: `projects.${slug}` });
 
-  return {
+  const image = project.image?.[locale as Locale];
+
+  return pageMetadata({
+    locale,
+    path: `/work/${slug}`,
     title: t("title", { client: p("client") }),
     description: p("summary"),
-  };
+    image: image ? { url: image, alt: p("client") } : undefined,
+  });
 }
 
 export default async function ProjectPage(
@@ -56,8 +64,51 @@ export default async function ProjectPage(
   const index = PROJECTS.findIndex((entry) => entry.slug === project.slug);
   const next = PROJECTS[(index + 1) % PROJECTS.length];
 
+  const nav = await getTranslations({ locale, namespace: "nav" });
+  const url = pageUrl(locale, `/work/${slug}`);
+  const image = project.image?.[locale];
+
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "CreativeWork",
+              "@id": `${url}#case-study`,
+              name: p("client"),
+              headline: p("title"),
+              description: p("summary"),
+              abstract: p("challenge"),
+              url,
+              mainEntityOfPage: url,
+              inLanguage: locale,
+              dateCreated: String(project.year),
+              genre: c(project.category),
+              keywords: [...messagesList(p.raw("tags")), ...project.stack].join(
+                ", ",
+              ),
+              creativeWorkStatus: inDevelopment ? "Draft" : "Published",
+              creator: { "@id": `${SITE_URL}/#studio` },
+              ...(image && { image: `${SITE_URL}${image}` }),
+              ...(project.url && { sameAs: project.url[locale] }),
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { name: SITE_NAME, item: pageUrl(locale) },
+                { name: nav("work"), item: pageUrl(locale, "/work") },
+                { name: p("client"), item: url },
+              ].map((crumb, crumbIndex) => ({
+                "@type": "ListItem",
+                position: crumbIndex + 1,
+                ...crumb,
+              })),
+            },
+          ],
+        }}
+      />
       <Reveal as="header" className="gutter pt-[calc(var(--nav-h)+7vw)] pb-[5vw]">
         <span className="mask">
           <Link href="/work" className="link a-up t-xs" style={delay(0.1)}>

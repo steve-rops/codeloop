@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { Reveal } from "./reveal";
 import { stagger } from "../lib/motion";
 import { italic } from "../lib/rich";
-import { CONTACT_EMAIL } from "../lib/site";
+import { CONTACT_EMAIL, GITHUB_URL } from "../lib/site";
 
 const CONTACT = [
   { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
@@ -11,7 +11,7 @@ const CONTACT = [
 ];
 
 const SOCIAL = [
-  { label: "GitHub", href: "https://github.com/steve-rops/" },
+  { label: "GitHub", href: GITHUB_URL },
 ];
 
 export function SiteFooter() {

@@ -7,6 +7,7 @@ import { PillButton } from "@/app/components/pill-button";
 import { Reveal } from "@/app/components/reveal";
 import { stagger } from "@/app/lib/motion";
 import { italic } from "@/app/lib/rich";
+import { pageMetadata } from "@/app/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/contact">,
@@ -14,7 +15,12 @@ export async function generateMetadata(
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "metadata.contact" });
 
-  return { title: t("title"), description: t("description") };
+  return pageMetadata({
+    locale,
+    path: "/contact",
+    title: t("title"),
+    description: t("description"),
+  });
 }
 
 // The rows are fixed; only their copy is translated, so the keys live here and

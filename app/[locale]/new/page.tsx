@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { BriefWizard } from "@/app/components/brief-wizard";
 import { PageHeader } from "@/app/components/page-header";
 import { italic } from "@/app/lib/rich";
+import { pageMetadata } from "@/app/lib/seo";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/new">,
@@ -11,7 +12,12 @@ export async function generateMetadata(
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "metadata.new" });
 
-  return { title: t("title"), description: t("description") };
+  return pageMetadata({
+    locale,
+    path: "/new",
+    title: t("title"),
+    description: t("description"),
+  });
 }
 
 export default function NewProjectPage() {

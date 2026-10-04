@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
+import { JsonLd } from "@/app/components/json-ld";
 import { PageHeader } from "@/app/components/page-header";
 import { PillButton } from "@/app/components/pill-button";
 import { Reveal } from "@/app/components/reveal";
 import { stagger } from "@/app/lib/motion";
 import { italic } from "@/app/lib/rich";
+import { pageMetadata, pageUrl } from "@/app/lib/seo";
+import { SITE_URL } from "@/app/lib/site";
 import { WorkGallery } from "@/app/components/work-gallery";
 import { PROJECTS } from "@/app/lib/projects";
 
@@ -15,14 +18,42 @@ export async function generateMetadata(
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "metadata.work" });
 
-  return { title: t("title"), description: t("description") };
+  return pageMetadata({
+    locale,
+    path: "/work",
+    title: t("title"),
+    description: t("description"),
+  });
 }
 
 export default function WorkPage() {
   const t = useTranslations("workPage");
+  const meta = useTranslations("metadata.work");
+  const projects = useTranslations("projects");
+  const locale = useLocale();
 
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: meta("title"),
+          description: meta("description"),
+          url: pageUrl(locale, "/work"),
+          inLanguage: locale,
+          isPartOf: { "@id": `${SITE_URL}/#website` },
+          mainEntity: {
+            "@type": "ItemList",
+            itemListElement: PROJECTS.map((project, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: projects(`${project.slug}.client`),
+              url: pageUrl(locale, `/work/${project.slug}`),
+            })),
+          },
+        }}
+      />
       <PageHeader
         eyebrow={t("eyebrow", {
           count: String(PROJECTS.length).padStart(2, "0"),

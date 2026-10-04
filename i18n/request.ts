@@ -16,7 +16,7 @@ import { routing } from "./routing";
 export default getRequestConfig(async ({ locale }) => {
   if (!locale) {
     // The segment is effectively a catch-all, so anything that isn't a locale
-    // we support (/robots.txt, /favicon.ico, junk) lands here as a 404.
+    // we support (/wp-login, /en-GB, junk) lands here as a 404.
     const paramValue = await rootParams.locale();
     if (!hasLocale(routing.locales, paramValue)) notFound();
     locale = paramValue;

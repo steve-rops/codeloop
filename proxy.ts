@@ -8,6 +8,6 @@ export default createMiddleware(routing);
 
 export const config = {
   // Everything except API routes, Next internals, and files with an extension
-  // (favicon.ico, the hero footage, and so on).
+  // (favicon.ico, robots.txt, sitemap.xml, llms.txt, the hero footage, and so on).
   matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
 };
