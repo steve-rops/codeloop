@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { PillButton } from "./pill-button";
 import { Reveal } from "./reveal";
 import { FitLines } from "./fit-lines";
+import { HeroVideo } from "./hero-video";
 import { delay } from "../lib/motion";
 import { italic } from "../lib/rich";
 
@@ -27,39 +28,13 @@ export function Hero() {
       id="top"
       className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-[calc(var(--nav-h)+6vw)] pb-[6vw]"
     >
-      {/* Muted + inline is what buys autoplay on iOS; the footage carries no
-          information, so it stays out of the accessibility tree and the tab
-          order entirely. */}
-      {/* The poster is the first frame, so the screen is painted at once and
-          the footage takes over from the same picture; `metadata` keeps the
-          browser from pulling the whole file before it has decided to play. */}
-      <video
-        src="/code-loop-bg.mp4"
-        poster="/code-loop-poster.jpg"
-        preload="metadata"
-        autoPlay
-        loop
-        muted
-        playsInline
-        aria-hidden="true"
-        tabIndex={-1}
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
-      />
-      {/* The footage is near-paper on the left where the type sits, but it
-          breathes — glyphs drift through the headline and take the contrast
-          with them. The scrim tints and blurs the backdrop under the copy so
-          the type reads against a settled ground, and dissolves to the right
-          where the footage is the whole point. */}
-      <div
-        aria-hidden="true"
-        className=" pointer-events-none absolute inset-0 z-0"
-      />
+      <HeroVideo />
 
       <div className="px-4 md:px-16 relative z-10 space-y-4 gap-y-[var(--block-y)]">
         <h1 className=" t-xl col-span-8 w-[86%] max-md:w-full">
           <FitLines
             className="mask"
-            groundClassName="bg-white/10 w-fit backdrop-blur-sm"
+            groundClassName="bg-white/10 w-fit md:backdrop-blur-sm"
           >
             <span className="a-up w-fit block" style={delay(0.1)}>
               {t("line1")}
@@ -67,7 +42,7 @@ export function Hero() {
           </FitLines>{" "}
           <FitLines
             className="mask"
-            groundClassName="bg-white/10 w-fit backdrop-blur-sm"
+            groundClassName="bg-white/10 w-fit md:backdrop-blur-sm"
           >
             <span className="a-up w-fit block t-ml" style={delay(0.19)}>
               {t("line2")}

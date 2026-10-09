@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Archivo, Instrument_Serif } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Cursor } from "@/app/components/cursor";
 import { JsonLd } from "@/app/components/json-ld";
@@ -107,6 +107,28 @@ export async function generateMetadata(
 }
 
 export const viewport: Viewport = { themeColor: "#fafafa" };
+
+/**
+ * The namespaces that client components translate. Only these cross the
+ * boundary: the provider would otherwise serialise the whole catalogue into
+ * every page, which on the Greek tree was more than half of the HTML.
+ * A client component that picks up a new namespace has to be added here.
+ */
+const CLIENT_NAMESPACES = [
+  "nav", // SiteNav, MobileNav
+  "localeSwitcher", // LocaleSwitcher
+  "engagements", // Engagements
+  "form", // ContactForm, BriefWizard
+  "errors", // ContactForm, BriefWizard
+  "brief", // BriefWizard
+] as const;
+
+function pick<T extends Record<string, unknown>>(
+  messages: T,
+  keys: readonly (keyof T)[],
+) {
+  return Object.fromEntries(keys.map((key) => [key, messages[key]])) as T;
+}
 
 /**
  * The studio, the person behind it and the site as schema.org entities. Pages
@@ -217,6 +239,8 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
   // unknown segment is a 404 rather than a page rendered in a made-up language.
   if (!hasLocale(routing.locales, locale)) notFound();
 
+  const messages = await getMessages({ locale });
+
   return (
     // No `scroll-smooth` here on purpose: Lenis owns in-page anchors, and a
     // native smooth scroll running underneath it fights the same gesture.
@@ -231,9 +255,9 @@ export default async function LocaleLayout(props: LayoutProps<"/[locale]">) {
           <style>{`.a-up,.a-down,.a-fade-up,.a-fade-rotate,.a-up-img{opacity:1;transform:none}.a-fill-w{width:100%}.a-fill-h{height:100%}`}</style>
         </noscript>
         <JsonLd data={await siteGraph(locale)} />
-        {/* The nav, the wizard and the filters are all client components that
-            translate, so the locale and messages have to cross the boundary. */}
-        <NextIntlClientProvider>
+        {/* The nav, the wizard and the forms are client components that
+            translate, so the locale and their messages cross the boundary. */}
+        <NextIntlClientProvider messages={pick(messages, CLIENT_NAMESPACES)}>
           <SmoothScroll>
             <Preloader />
             <PageTransition />

@@ -6,8 +6,14 @@ import { markReady } from "../lib/ready";
 import { useMediaQuery } from "../lib/use-media-query";
 import { LoopMark } from "./loop-mark";
 
-/** How long the counter takes to run, before any wait on real assets. */
-const COUNT_MS = 1000;
+/**
+ * How long the counter takes to run, measured from navigation start rather
+ * than from mount. The panel is in the server HTML, so it has been on screen
+ * since first paint; the time the browser then spends downloading and running
+ * the scripts already counts against this, and on a slow connection the
+ * counter is at 100 the moment it is able to tick.
+ */
+const COUNT_MS = 400;
 /** Matches the clip-path wipe below; the panel unmounts once it has cleared. */
 const WIPE_MS = 750;
 
@@ -35,21 +41,18 @@ export function Preloader() {
 
     let frame = 0;
     let assetsReady = false;
-    const started = performance.now();
 
-    const loaded =
-      document.readyState === "complete"
-        ? Promise.resolve()
-        : new Promise<void>((resolve) => {
-            window.addEventListener("load", () => resolve(), { once: true });
-          });
-
-    void Promise.all([document.fonts.ready, loaded]).then(() => {
+    // Fonts are the only thing worth holding for: the hero's copy is set in
+    // them. Waiting on the window `load` event meant waiting on the footage and
+    // on images well below the fold, none of which the viewer can see yet.
+    void document.fonts.ready.then(() => {
       assetsReady = true;
     });
 
+    // `now` is a timestamp from navigation start, the same origin as
+    // `performance.now()`, which is what makes the clock above hold.
     const tick = (now: number) => {
-      const t = Math.min(1, (now - started) / COUNT_MS);
+      const t = Math.min(1, now / COUNT_MS);
       const eased = 1 - Math.pow(1 - t, 3);
       // The counter stalls just short of 100 until the page is genuinely ready,
       // so it never claims to be finished while a font is still swapping.

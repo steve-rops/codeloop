@@ -1,6 +1,6 @@
 "use client";
 
-import SplitType from "split-type";
+import type SplitType from "split-type";
 import { useEffect, useRef, type ElementType, type ReactNode } from "react";
 
 type SplitLinesProps = {
@@ -39,7 +39,11 @@ export function SplitLines({
     let cancelled = false;
     let split: SplitType | null = null;
 
-    const build = () => {
+    // The library is pulled in here rather than at the top: it is only ever
+    // needed once the fonts are in, so it has no business in the bundle that
+    // hydration waits on.
+    const build = async () => {
+      const { default: SplitType } = await import("split-type");
       if (cancelled) return;
 
       split = new SplitType(el, { types: "lines", tagName: "span" });
