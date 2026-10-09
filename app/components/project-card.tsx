@@ -52,7 +52,7 @@ export function ProjectCard({
             <Media
               seed={project.slug}
               src={project.image?.[locale]}
-              alt={p("client")}
+              alt={t("imageAlt", { client: p("client") })}
               sizes="(max-width: 768px) 100vw, 50vw"
               className="h-full w-full"
             />

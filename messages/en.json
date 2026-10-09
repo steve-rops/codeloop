@@ -1,24 +1,46 @@
 {
   "metadata": {
     "home": {
-      "title": "codeloop — web design & development",
-      "description": "A freelance studio designing and building websites that feel as good to use as they look — for startups, brands, and everything between."
+      "title": "codeloop — Web design & development studio in Athens, Greece",
+      "description": "codeloop designs and builds fast, bilingual websites, e-shops and web apps for businesses in Greece and abroad. Based in Athens, working remotely worldwide."
     },
     "work": {
-      "title": "Work — codeloop",
-      "description": "Selected projects from codeloop — e-commerce storefronts, SaaS products, brand systems, and web apps."
+      "title": "Selected work: websites, e-shops & web apps",
+      "description": "Case studies from codeloop: bilingual websites, booking sites and web apps built with Next.js and a headless CMS, with the problem, the approach and what changed."
     },
     "contact": {
-      "title": "Contact — codeloop",
-      "description": "Get in touch with codeloop about a website, web app, or brand system."
+      "title": "Contact a web designer & developer in Athens",
+      "description": "Get in touch with codeloop about a website, e-shop, web app or brand system. A reply from a person within one working day, in English or Greek."
     },
     "new": {
-      "title": "Start a project — codeloop",
-      "description": "Answer a few short questions about your project and we'll come back with a plan, a timeline, and a number."
+      "title": "Start a project: get a plan, timeline & quote",
+      "description": "Answer five short questions about your website or web app and codeloop comes back within a working day with a plan, a timeline and a number."
     },
     "project": {
-      "title": "{client} — codeloop",
-      "notFound": "Not found — codeloop"
+      "title": "{client} case study",
+      "notFound": "Page not found"
+    },
+    "services": {
+      "title": "Web design, development & branding services",
+      "description": "What codeloop does: web design, Next.js development, e-shops, web apps and brand systems for businesses in Greece and abroad, delivered by one small team end to end."
+    },
+    "service": {
+      "design": {
+        "title": "Web design services in Athens, Greece",
+        "description": "Website design that converts: research, wireframes, UI design and prototypes for marketing sites, e-shops and products, in English and Greek."
+      },
+      "development": {
+        "title": "Web development with Next.js, React & headless CMS",
+        "description": "Fast, accessible, SEO-ready websites and web apps built with Next.js, TypeScript and Sanity CMS. Bilingual by default, hosted on Vercel, maintained after launch."
+      },
+      "brand": {
+        "title": "Brand systems & design systems",
+        "description": "Identity and design-system work that keeps your website, product and marketing consistent as you grow: logo use, type, colour, components and guidelines."
+      }
+    },
+    "about": {
+      "title": "About the studio: who builds your website",
+      "description": "codeloop is a freelance web design and development studio run by Stefanos Topsidis from Athens, Greece, building bilingual websites and web apps for clients worldwide."
     }
   },
   "nav": {
@@ -28,7 +50,8 @@
     "contact": "Contact",
     "cta": "Start a project",
     "menuOpen": "Menu +",
-    "menuClose": "Close —"
+    "menuClose": "Close —",
+    "about": "Studio"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -37,7 +60,7 @@
   },
   "hero": {
     "line1": "Web design & development",
-    "line2": "",
+    "line2": "for websites and web apps",
     "role": "Freelance studio",
     "location": "Remote, worldwide",
     "lead": "We design and build websites that feel as good to use as they look.",
@@ -51,17 +74,119 @@
     "items": {
       "design": {
         "title": "Web design",
-        "desc": "Interfaces that look sharp and convert — from landing pages to full product design."
+        "desc": "Interfaces that look sharp and convert — from landing pages to full product design.",
+        "intro": "Design here means working out what a page is for before deciding what it looks like. We start from the people visiting the site and the action you need them to take, then design the shortest honest path between the two. Every layout is tested in a real browser at phone and desktop widths before it is called finished.",
+        "deliverables": {
+          "0": "Sitemap and content model",
+          "1": "Wireframes for the pages that carry the load",
+          "2": "UI design in Figma, desktop and mobile",
+          "3": "Clickable prototype for review",
+          "4": "Design tokens ready for the build"
+        },
+        "process": {
+          "0": "Research: who visits, what they need, what competitors do.",
+          "1": "Structure: sitemap, page outlines and the copy each page needs.",
+          "2": "Design: interface, type and motion, reviewed as working pages.",
+          "3": "Handover: tokens and components the build uses directly."
+        },
+        "goodFor": {
+          "0": "Marketing sites that need to explain and sell",
+          "1": "E-shops and booking sites",
+          "2": "Redesigns of sites that look dated or convert poorly",
+          "3": "Product interfaces and dashboards"
+        },
+        "faq": {
+          "0": {
+            "q": "Do you design in Figma?",
+            "a": "Yes. Wireframes and UI live in Figma, and you get the file. Because we also build the site, the design is reviewed as working pages in a browser from the second week, not only as flat screens."
+          },
+          "1": {
+            "q": "Can you design only, and hand it to another developer?",
+            "a": "Yes. The handover includes tokens, components and a specification. Most clients keep design and build in one place with us, because it removes the gap where things get lost."
+          },
+          "2": {
+            "q": "Do you write the copy too?",
+            "a": "We structure it and write the first draft for the pages we design, in English or Greek. Final wording is reviewed with you."
+          }
+        }
       },
       "development": {
         "title": "Development",
-        "desc": "Fast, accessible builds in modern frameworks, shipped and maintained end to end."
+        "desc": "Fast, accessible builds in modern frameworks, shipped and maintained end to end.",
+        "intro": "We build with Next.js, React and TypeScript, with content in a headless CMS such as Sanity so your team edits pages, products and prices without a developer. Every site ships with the technical SEO in place: semantic HTML, metadata and structured data per page and per language, fast loading on a phone, and accessibility checked before launch.",
+        "deliverables": {
+          "0": "Front-end build in Next.js and TypeScript",
+          "1": "Headless CMS set-up and editor training",
+          "2": "Bilingual routing with per-language metadata",
+          "3": "Forms, booking flows and third-party integrations",
+          "4": "Hosting on Vercel, analytics and launch checklist"
+        },
+        "process": {
+          "0": "Set-up: repository, hosting, CMS schema and the design tokens.",
+          "1": "Build: pages go live on a preview URL in weekly increments.",
+          "2": "Content: your team loads real content while the build continues.",
+          "3": "Launch: performance, SEO and accessibility pass, then the domain switch."
+        },
+        "goodFor": {
+          "0": "Bilingual websites for businesses in Greece",
+          "1": "Booking and reservation sites",
+          "2": "E-commerce storefronts",
+          "3": "Web apps with accounts, dashboards and maps"
+        },
+        "faq": {
+          "0": {
+            "q": "Why Next.js and not WordPress?",
+            "a": "Speed, security and control. A Next.js site is pre-rendered, so pages load instantly and rank better on Core Web Vitals, and there is no plugin layer to patch. Editors still get a friendly CMS for content."
+          },
+          "1": {
+            "q": "Can my team update the site without you?",
+            "a": "Yes. Pages, text, images, products and prices are edited in the CMS. Publishing a new car on the Marvel Cars site takes the team about five minutes."
+          },
+          "2": {
+            "q": "Who hosts the site and what does it cost?",
+            "a": "Sites run on Vercel, on your own account so you own everything. Most sites fit within the free or the lowest paid tier; the CMS has a free tier too."
+          },
+          "3": {
+            "q": "Do you maintain sites after launch?",
+            "a": "Yes. Launch includes a handover, and the ongoing partner engagement reserves monthly capacity for updates, new pages and performance work."
+          }
+        }
       },
       "brand": {
         "title": "Brand systems",
-        "desc": "Design systems and identity work that keep every surface consistent as you grow."
+        "desc": "Design systems and identity work that keep every surface consistent as you grow.",
+        "intro": "A brand system is the set of rules that makes every surface, from the website to a social post, look like it comes from the same company. We define the identity where one is missing, and where one exists we turn it into a design system: type, colour, spacing, components and the guidelines that keep new work consistent.",
+        "deliverables": {
+          "0": "Logo use, type and colour definitions",
+          "1": "Component library matching the website",
+          "2": "Templates for social posts and presentations",
+          "3": "Written guidelines for your team and future suppliers"
+        },
+        "process": {
+          "0": "Audit: everything that carries the brand today, and where it breaks.",
+          "1": "Define: the few rules that matter, written down and shown in use.",
+          "2": "Apply: the website and the templates built on the same tokens.",
+          "3": "Hand over: guidelines plus the working files."
+        },
+        "goodFor": {
+          "0": "Companies whose website and materials have drifted apart",
+          "1": "Startups launching with a new identity",
+          "2": "Teams that produce content in-house and need templates",
+          "3": "Rebrands that need to land on the website first"
+        },
+        "faq": {
+          "0": {
+            "q": "Do you design logos?",
+            "a": "As part of an identity for a web project, yes. We do not take on logo-only work; the value of a brand system is in applying it consistently, which starts with the site."
+          },
+          "1": {
+            "q": "We already have a brand book. Is this still useful?",
+            "a": "Usually. A brand book covers print and logo use; a design system covers the web: components, states, spacing and motion. We build the second on top of the first."
+          }
+        }
       }
-    }
+    },
+    "more": "Read more →"
   },
   "workSection": {
     "eyebrow": "02 — Selected work",
@@ -122,12 +247,13 @@
     "ctaCursor": "Let's talk",
     "contact": "Contact",
     "studio": "Studio",
-    "addressLine1": "Remote-first",
-    "addressLine2": "Working worldwide",
+    "addressLine1": "Athens, Greece",
+    "addressLine2": "Remote-first, working worldwide",
     "addressLine3": "Mon – Fri, 09:00 – 18:00 GMT",
     "elsewhere": "Elsewhere",
     "backToTop": "Back to top",
-    "copyright": "codeloop® ©{year}"
+    "copyright": "codeloop® ©{year}",
+    "pages": "Pages"
   },
   "contactPage": {
     "eyebrow": "Contact",
@@ -146,7 +272,7 @@
       },
       "based": {
         "label": "Based",
-        "value": "Remote — working worldwide"
+        "value": "Athens, Greece — working remotely worldwide"
       }
     },
     "brief": {
@@ -181,7 +307,8 @@
     "nextProject": "Next project",
     "cta": "Start a project",
     "viewCase": "View case",
-    "inDevelopment": "Under development"
+    "inDevelopment": "Under development",
+    "imageAlt": "Homepage of the {client} website, designed and built by codeloop"
   },
   "categories": {
     "ecommerce": "E-commerce",
@@ -457,5 +584,127 @@
         "4": "Gave the print works and building management their own pages, so the office's two other services aren't buried under the listings."
       }
     }
+  },
+  "servicesPage": {
+    "eyebrow": "Services",
+    "title": "What we do, and how it <i>fits</i> together.",
+    "intro": "Research, design, development and brand work from one small team, so the people who design the site are the people who build it.",
+    "ctaLine1": "Not sure which",
+    "ctaLine2": "one you <i>need</i>?",
+    "ctaBody": "Answer five short questions and we'll tell you what we'd build, how long it takes and what it costs.",
+    "cta": "Start a project →"
+  },
+  "servicePage": {
+    "back": "← All services",
+    "deliverables": "01 — What you get",
+    "process": "02 — How it goes",
+    "goodFor": "03 — Good for",
+    "faq": "04 — Questions",
+    "work": "Related work",
+    "allWork": "All work →",
+    "otherServices": "Other services",
+    "cta": "Start a project"
+  },
+  "aboutPage": {
+    "eyebrow": "Studio",
+    "title": "A small studio that designs <i>and</i> builds.",
+    "intro": "codeloop is run by Stefanos Topsidis, a web designer and developer based in Athens, Greece, working remotely with clients across Greece and abroad.",
+    "whoTitle": "01 — Who",
+    "whoBody": "One person does the design and the code, with specialists brought in for photography, copy or illustration when a project needs them. That is deliberate: the usual gap between an agency's designer and its developer is where detail gets lost and timelines slip. Here the person who drew the page is the person who ships it.",
+    "howTitle": "02 — How we work",
+    "principles": {
+      "0": {
+        "title": "Working pages, not mock-ups",
+        "body": "From the second week you review real pages in a browser, on your phone, with your content."
+      },
+      "1": {
+        "title": "Bilingual by default",
+        "body": "Every site for a Greek business ships in Greek and English, each with its own URLs and metadata."
+      },
+      "2": {
+        "title": "Fast and findable",
+        "body": "Performance, accessibility and technical SEO are part of the build, not an add-on after launch."
+      },
+      "3": {
+        "title": "You own everything",
+        "body": "The code, the CMS, the hosting account and the design files are yours from day one."
+      }
+    },
+    "stackTitle": "03 — Tools",
+    "stackBody": "Next.js, React and TypeScript for the front end, Tailwind for styling, Sanity as the headless CMS, Vercel for hosting, Figma for design.",
+    "factsTitle": "04 — In short",
+    "facts": {
+      "based": {
+        "label": "Based",
+        "value": "Athens, Greece"
+      },
+      "clients": {
+        "label": "Clients",
+        "value": "Greece and worldwide, remotely"
+      },
+      "languages": {
+        "label": "Languages",
+        "value": "English, Greek"
+      },
+      "since": {
+        "label": "Shipping since",
+        "value": "2025"
+      },
+      "response": {
+        "label": "Response time",
+        "value": "Within one working day"
+      }
+    },
+    "ctaLine1": "Want to see",
+    "ctaLine2": "the <i>work</i>?",
+    "ctaBody": "Five recent projects, each with the problem, what we did and what changed after.",
+    "cta": "Selected work →"
+  },
+  "faq": {
+    "eyebrow": "05 — Questions",
+    "titleLine1": "Things people ask",
+    "titleLine2": "before they <i>start</i>.",
+    "items": {
+      "0": {
+        "q": "How much does a website cost?",
+        "a": "Most marketing sites we build land between $5k and $15k. E-shops, booking sites and web apps start higher because of the integrations. The brief asks for a budget range and we scope the project to fit it, rather than quoting a number and squeezing the work afterwards."
+      },
+      "1": {
+        "q": "How long does it take?",
+        "a": "A design-and-build engagement runs six to twelve weeks. If the scope is unclear, a two-week discovery sprint comes first and ends with a fixed estimate. Small sites can launch in a month."
+      },
+      "2": {
+        "q": "Do you work with clients outside Athens?",
+        "a": "Yes. The studio is based in Athens, Greece, and works remotely with businesses across Greece and abroad, in English and Greek. Meetings happen on video, and progress is reviewed on a live preview link."
+      },
+      "3": {
+        "q": "What do you build websites with?",
+        "a": "Next.js, React and TypeScript, with Tailwind for styling and Sanity as the headless CMS. Sites are hosted on Vercel. The result is a site that loads fast, scores well on Core Web Vitals and does not need plugin updates."
+      },
+      "4": {
+        "q": "Can I update the site myself after launch?",
+        "a": "Yes. Text, images, pages, products and prices are edited in the CMS without touching code. Every build ends with a short training session and a written guide."
+      },
+      "5": {
+        "q": "Is SEO included?",
+        "a": "Technical SEO is part of every build: semantic HTML, titles and descriptions per page and language, structured data, a sitemap, hreflang for the two languages, and performance tuned for mobile. Content strategy and ongoing SEO can be added through the partner engagement."
+      },
+      "6": {
+        "q": "Do you build multilingual sites?",
+        "a": "Every site we ship for a Greek business is built in Greek and English, with separate URLs, metadata and content per language, so each version can rank on its own."
+      },
+      "7": {
+        "q": "What happens after launch?",
+        "a": "You get a handover: the code, the CMS, the hosting account and the design files, plus training. If you want continued support, the ongoing partner engagement reserves monthly capacity for updates and new pages."
+      }
+    }
+  },
+  "notFound": {
+    "eyebrow": "404",
+    "title": "That page <i>isn't</i> here.",
+    "intro": "The address may be wrong, or the page has moved. Everything we have is reachable from the links below.",
+    "home": "Home",
+    "work": "Selected work",
+    "contact": "Contact"
   }
 }

@@ -1,13 +1,9 @@
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { stagger } from "../lib/motion";
-import { italic } from "../lib/rich";
-import { PillButton } from "./pill-button";
+import { SERVICES } from "../lib/services";
 import { Reveal } from "./reveal";
 import { SplitLines } from "./split-lines";
-
-// The rows are fixed; their copy is not. Keys only here, titles and blurbs come
-// from `services.items` in the catalogue.
-const SERVICES = ["design", "development", "brand"] as const;
 
 export function Services() {
   const t = useTranslations("services");
@@ -45,6 +41,8 @@ export function Services() {
         </div>
       </Reveal>
 
+      {/* Each row is a link to the service's own page, so the section is also
+          the hub those pages hang off. */}
       <ul className="mt-[var(--block-y)]">
         {SERVICES.map((service, index) => (
           <Reveal as="li" key={service} className="block">
@@ -52,7 +50,11 @@ export function Services() {
               <span className="a-fill-w bg-ink block h-full" />
             </div>
 
-            <div className="col-8 items-baseline py-[var(--row-y)]">
+            <Link
+              href={`/services/${service}`}
+              data-cursor={t("more")}
+              className="col-8 items-baseline py-[var(--row-y)]"
+            >
               <span className="mask col-span-1">
                 <span className="a-up t-xs block text-muted">
                   ({String(index + 1).padStart(2, "0")})
@@ -73,7 +75,7 @@ export function Services() {
               >
                 {t(`items.${service}.desc`)}
               </p>
-            </div>
+            </Link>
           </Reveal>
         ))}
         <div className="flex h-px">

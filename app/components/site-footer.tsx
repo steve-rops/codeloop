@@ -2,20 +2,18 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Reveal } from "./reveal";
 import { stagger } from "../lib/motion";
+import { NAV_LINKS } from "../lib/nav";
 import { italic } from "../lib/rich";
-import { CONTACT_EMAIL, GITHUB_URL } from "../lib/site";
+import { CONTACT_EMAIL, SOCIAL_LINKS, WHATSAPP_URL } from "../lib/site";
 
 const CONTACT = [
   { label: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
-  { label: "WhatsApp", href: "https://wa.me/306909417500" },
-];
-
-const SOCIAL = [
-  { label: "GitHub", href: GITHUB_URL },
+  { label: "WhatsApp", href: WHATSAPP_URL },
 ];
 
 export function SiteFooter() {
   const t = useTranslations("footer");
+  const nav = useTranslations("nav");
 
   return (
     <Reveal
@@ -40,9 +38,32 @@ export function SiteFooter() {
       </Link>
 
       <div className="col-8 mt-[var(--block-y)] gap-y-[var(--block-y)]">
+        {/* The header's links again, so every page is reachable from every
+            other one without the menu. */}
+        <nav aria-label={t("pages")} className="col-span-2 max-md:col-span-2">
+          <span className="mask">
+            <span className="a-up t-xs block opacity-60">{t("pages")}</span>
+          </span>
+          <ul className="mt-[var(--stack-y)] flex flex-col gap-1">
+            {NAV_LINKS.map((link, index) => (
+              <li key={link.href} className="mask">
+                <Link
+                  href={link.href}
+                  className="link a-up t-xs block"
+                  style={stagger(index + 1, 0.05)}
+                >
+                  {nav(link.label)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
         <div className="col-span-2 max-md:col-span-2">
           <span className="mask">
-            <span className="a-up t-xs block opacity-60">{t("contact")}</span>
+            <span className="a-up t-xs block opacity-60" style={stagger(1, 0.05)}>
+              {t("contact")}
+            </span>
           </span>
           <ul className="mt-[var(--stack-y)] flex flex-col gap-1">
             {CONTACT.map((item, index) => (
@@ -54,7 +75,7 @@ export function SiteFooter() {
                     rel: "noreferrer",
                   })}
                   className="link a-up t-xs"
-                  style={stagger(index + 1, 0.05)}
+                  style={stagger(index + 2, 0.05)}
                 >
                   {item.label}
                 </a>
@@ -65,7 +86,7 @@ export function SiteFooter() {
 
         <div className="col-span-2 max-md:col-span-2">
           <span className="mask">
-            <span className="a-up t-xs block opacity-60" style={stagger(1, 0.05)}>
+            <span className="a-up t-xs block opacity-60" style={stagger(2, 0.05)}>
               {t("studio")}
             </span>
           </span>
@@ -78,21 +99,21 @@ export function SiteFooter() {
           </address>
         </div>
 
-        <div className="col-span-2 col-start-6 max-md:col-span-2 max-md:col-start-3">
+        <div className="col-span-2 max-md:col-span-2">
           <span className="mask">
-            <span className="a-up t-xs block opacity-60" style={stagger(2, 0.05)}>
+            <span className="a-up t-xs block opacity-60" style={stagger(3, 0.05)}>
               {t("elsewhere")}
             </span>
           </span>
           <ul className="mt-[var(--stack-y)] flex flex-col gap-1">
-            {SOCIAL.map((item, index) => (
+            {SOCIAL_LINKS.map((item, index) => (
               <li key={item.href} className="mask">
                 <a
                   href={item.href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="me noreferrer"
                   className="link a-up t-xs"
-                  style={stagger(index + 3, 0.05)}
+                  style={stagger(index + 4, 0.05)}
                 >
                   {item.label}
                 </a>

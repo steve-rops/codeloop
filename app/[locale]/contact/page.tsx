@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { ContactForm } from "@/app/components/contact-form";
 import { PageHeader } from "@/app/components/page-header";
@@ -7,7 +7,9 @@ import { PillButton } from "@/app/components/pill-button";
 import { Reveal } from "@/app/components/reveal";
 import { stagger } from "@/app/lib/motion";
 import { italic } from "@/app/lib/rich";
-import { pageMetadata } from "@/app/lib/seo";
+import { JsonLd } from "@/app/components/json-ld";
+import { breadcrumbList, pageMetadata, pageUrl, webPage } from "@/app/lib/seo";
+import { SITE_NAME } from "@/app/lib/site";
 
 export async function generateMetadata(
   props: PageProps<"/[locale]/contact">,
@@ -29,9 +31,30 @@ const DETAILS = ["email", "response", "based"] as const;
 
 export default function ContactPage() {
   const t = useTranslations("contactPage");
+  const meta = useTranslations("metadata.contact");
+  const nav = useTranslations("nav");
+  const locale = useLocale();
 
   return (
     <main>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            webPage({
+              locale,
+              path: "/contact",
+              type: "ContactPage",
+              name: meta("title"),
+              description: meta("description"),
+            }),
+            breadcrumbList([
+              { name: SITE_NAME, item: pageUrl(locale) },
+              { name: nav("contact"), item: pageUrl(locale, "/contact") },
+            ]),
+          ],
+        }}
+      />
       <PageHeader
         eyebrow={t("eyebrow")}
         title={t.rich("title", italic)}

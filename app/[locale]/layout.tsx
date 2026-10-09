@@ -11,12 +11,25 @@ import { Preloader } from "@/app/components/preloader";
 import { SiteFooter } from "@/app/components/site-footer";
 import { SiteNav } from "@/app/components/site-nav";
 import { SmoothScroll } from "@/app/components/smooth-scroll";
-import { pageMetadata, pageUrl } from "@/app/lib/seo";
 import {
+  FOUNDER_ID,
+  pageMetadata,
+  pageUrl,
+  STUDIO_ID,
+  WEBSITE_ID,
+} from "@/app/lib/seo";
+import { SERVICE_TYPES, SERVICES } from "@/app/lib/services";
+import {
+  BASE_COUNTRY,
+  BASE_LOCALITY,
+  BASE_REGION,
   CONTACT_EMAIL,
-  GITHUB_URL,
+  CONTACT_PHONE,
+  FOUNDER_NAME,
+  OPENING_HOURS,
   SITE_NAME,
   SITE_URL,
+  SOCIAL_LINKS,
 } from "@/app/lib/site";
 import "../globals.css";
 
@@ -52,23 +65,39 @@ export async function generateMetadata(
   const { locale } = await props.params;
   const t = await getTranslations({ locale, namespace: "metadata.home" });
 
+  // Search Console and Bing accept a meta tag as proof of ownership; set the
+  // codes in the environment and they are printed, leave them unset and the
+  // tags are left out. (Google is also verified by the HTML file in public/.)
+  const verification = {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+      google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    }),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION && {
+      other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION },
+    }),
+  };
+
   // The home page's metadata doubles as the site-wide default; every other
   // page overrides the title, description, canonical and share card.
   return {
     metadataBase: new URL(SITE_URL),
     applicationName: SITE_NAME,
-    authors: [{ name: SITE_NAME, url: SITE_URL }],
-    creator: SITE_NAME,
+    authors: [{ name: FOUNDER_NAME, url: pageUrl(locale, "/about") }],
+    creator: FOUNDER_NAME,
     publisher: SITE_NAME,
+    formatDetection: { telephone: false, email: false, address: false },
     robots: {
       index: true,
       follow: true,
       googleBot: {
+        index: true,
+        follow: true,
         "max-image-preview": "large",
         "max-snippet": -1,
         "max-video-preview": -1,
       },
     },
+    ...(Object.keys(verification).length > 0 && { verification }),
     ...pageMetadata({
       locale,
       title: t("title"),
@@ -79,36 +108,55 @@ export async function generateMetadata(
 
 export const viewport: Viewport = { themeColor: "#fafafa" };
 
-const SERVICES = ["design", "development", "brand"] as const;
-
 /**
- * The studio and the site as schema.org entities. Pages that describe
- * something more specific (a case study, the work index) point back at these
- * by `@id` rather than restating them.
+ * The studio, the person behind it and the site as schema.org entities. Pages
+ * that describe something more specific (a case study, a service, the work
+ * index) point back at these by `@id` rather than restating them.
  */
 async function siteGraph(locale: string) {
   const meta = await getTranslations({ locale, namespace: "metadata.home" });
+  const about = await getTranslations({ locale, namespace: "aboutPage" });
   const services = await getTranslations({ locale, namespace: "services" });
+  const sameAs = SOCIAL_LINKS.map((link) => link.href);
 
   return {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "ProfessionalService",
-        "@id": `${SITE_URL}/#studio`,
+        "@id": STUDIO_ID,
         name: SITE_NAME,
         url: pageUrl(locale),
         description: meta("description"),
         email: CONTACT_EMAIL,
+        telephone: CONTACT_PHONE,
         logo: `${SITE_URL}/icon-512.png`,
         image: `${SITE_URL}/icon-512.png`,
-        areaServed: "Worldwide",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: BASE_LOCALITY,
+          addressRegion: BASE_REGION,
+          addressCountry: BASE_COUNTRY,
+        },
+        areaServed: [
+          { "@type": "Country", name: "Greece" },
+          { "@type": "Place", name: "Worldwide" },
+        ],
         knowsLanguage: [...routing.locales],
-        sameAs: [GITHUB_URL],
+        founder: { "@id": FOUNDER_ID },
+        foundingDate: about("facts.since.value"),
+        sameAs,
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: OPENING_HOURS.days,
+          opens: OPENING_HOURS.opens,
+          closes: OPENING_HOURS.closes,
+        },
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "sales",
           email: CONTACT_EMAIL,
+          telephone: CONTACT_PHONE,
           url: pageUrl(locale, "/contact"),
           availableLanguage: [...routing.locales],
         },
@@ -119,21 +167,44 @@ async function siteGraph(locale: string) {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
+              "@id": `${SITE_URL}/#service-${service}`,
               name: services(`items.${service}.title`),
               description: services(`items.${service}.desc`),
-              provider: { "@id": `${SITE_URL}/#studio` },
+              serviceType: SERVICE_TYPES[service],
+              url: pageUrl(locale, `/services/${service}`),
+              provider: { "@id": STUDIO_ID },
+              areaServed: [
+                { "@type": "Country", name: "Greece" },
+                { "@type": "Place", name: "Worldwide" },
+              ],
             },
           })),
         },
       },
       {
+        "@type": "Person",
+        "@id": FOUNDER_ID,
+        name: FOUNDER_NAME,
+        jobTitle: SERVICE_TYPES.design + " & " + SERVICE_TYPES.development,
+        url: pageUrl(locale, "/about"),
+        email: CONTACT_EMAIL,
+        worksFor: { "@id": STUDIO_ID },
+        knowsLanguage: [...routing.locales],
+        sameAs,
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: BASE_LOCALITY,
+          addressCountry: BASE_COUNTRY,
+        },
+      },
+      {
         "@type": "WebSite",
-        "@id": `${SITE_URL}/#website`,
+        "@id": WEBSITE_ID,
         name: SITE_NAME,
         url: pageUrl(locale),
         description: meta("description"),
-        inLanguage: locale,
-        publisher: { "@id": `${SITE_URL}/#studio` },
+        inLanguage: [...routing.locales],
+        publisher: { "@id": STUDIO_ID },
       },
     ],
   };

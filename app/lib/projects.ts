@@ -39,8 +39,8 @@ export const PROJECTS: Project[] = [
       el: "https://www.marvelcarsrentals.gr/el",
     },
     image: {
-      en: "/work/marvelcars-en.png",
-      el: "/work/marvelcars-en.png",
+      en: "/work/marvelcars-en.webp",
+      el: "/work/marvelcars-en.webp",
     },
   },
   {
@@ -54,8 +54,8 @@ export const PROJECTS: Project[] = [
       el: "https://s-karatheodoris.gr",
     },
     image: {
-      en: "/work/karatheodoris-en.png",
-      el: "/work/karatheodoris-el.png",
+      en: "/work/karatheodoris-en.webp",
+      el: "/work/karatheodoris-el.webp",
     },
   },
   {
@@ -69,8 +69,8 @@ export const PROJECTS: Project[] = [
       el: "https://dkexecutive.com/el",
     },
     image: {
-      en: "/work/dkexecutive-en.png",
-      el: "/work/dkexecutive-en.png",
+      en: "/work/dkexecutive-en.webp",
+      el: "/work/dkexecutive-en.webp",
     },
   },
   {
@@ -84,8 +84,8 @@ export const PROJECTS: Project[] = [
       el: "https://www.principal-catering.gr/el",
     },
     image: {
-      en: "/work/principal-en.png",
-      el: "/work/principal-en.png",
+      en: "/work/principal-en.webp",
+      el: "/work/principal-en.webp",
     },
   },
   {
@@ -101,8 +101,8 @@ export const PROJECTS: Project[] = [
       el: "https://evresis.vercel.app/el",
     },
     image: {
-      en: "/work/evresis-en.png",
-      el: "/work/evresis-en.png",
+      en: "/work/evresis-en.webp",
+      el: "/work/evresis-en.webp",
     },
     status: "development",
   },

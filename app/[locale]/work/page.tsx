@@ -7,8 +7,8 @@ import { PillButton } from "@/app/components/pill-button";
 import { Reveal } from "@/app/components/reveal";
 import { stagger } from "@/app/lib/motion";
 import { italic } from "@/app/lib/rich";
-import { pageMetadata, pageUrl } from "@/app/lib/seo";
-import { SITE_URL } from "@/app/lib/site";
+import { breadcrumbList, pageMetadata, pageUrl, webPage } from "@/app/lib/seo";
+import { SITE_NAME } from "@/app/lib/site";
 import { WorkGallery } from "@/app/components/work-gallery";
 import { PROJECTS } from "@/app/lib/projects";
 
@@ -31,27 +31,37 @@ export default function WorkPage() {
   const meta = useTranslations("metadata.work");
   const projects = useTranslations("projects");
   const locale = useLocale();
+  const nav = useTranslations("nav");
 
   return (
     <main>
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: meta("title"),
-          description: meta("description"),
-          url: pageUrl(locale, "/work"),
-          inLanguage: locale,
-          isPartOf: { "@id": `${SITE_URL}/#website` },
-          mainEntity: {
-            "@type": "ItemList",
-            itemListElement: PROJECTS.map((project, index) => ({
-              "@type": "ListItem",
-              position: index + 1,
-              name: projects(`${project.slug}.client`),
-              url: pageUrl(locale, `/work/${project.slug}`),
-            })),
-          },
+          "@graph": [
+            webPage({
+              locale,
+              path: "/work",
+              type: "CollectionPage",
+              name: meta("title"),
+              description: meta("description"),
+              extra: {
+                mainEntity: {
+                  "@type": "ItemList",
+                  itemListElement: PROJECTS.map((project, index) => ({
+                    "@type": "ListItem",
+                    position: index + 1,
+                    name: projects(`${project.slug}.client`),
+                    url: pageUrl(locale, `/work/${project.slug}`),
+                  })),
+                },
+              },
+            }),
+            breadcrumbList([
+              { name: SITE_NAME, item: pageUrl(locale) },
+              { name: nav("work"), item: pageUrl(locale, "/work") },
+            ]),
+          ],
         }}
       />
       <PageHeader

@@ -30,8 +30,13 @@ export function Hero() {
       {/* Muted + inline is what buys autoplay on iOS; the footage carries no
           information, so it stays out of the accessibility tree and the tab
           order entirely. */}
+      {/* The poster is the first frame, so the screen is painted at once and
+          the footage takes over from the same picture; `metadata` keeps the
+          browser from pulling the whole file before it has decided to play. */}
       <video
         src="/code-loop-bg.mp4"
+        poster="/code-loop-poster.jpg"
+        preload="metadata"
         autoPlay
         loop
         muted
@@ -59,7 +64,7 @@ export function Hero() {
             <span className="a-up w-fit block" style={delay(0.1)}>
               {t("line1")}
             </span>
-          </FitLines>
+          </FitLines>{" "}
           <FitLines
             className="mask"
             groundClassName="bg-white/10 w-fit backdrop-blur-sm"

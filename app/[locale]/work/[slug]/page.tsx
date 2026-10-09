@@ -8,7 +8,7 @@ import { Reveal } from "@/app/components/reveal";
 import { delay, stagger } from "@/app/lib/motion";
 import { messagesList } from "@/app/lib/messages-list";
 import { getProject, PROJECTS } from "@/app/lib/projects";
-import { pageMetadata, pageUrl } from "@/app/lib/seo";
+import { breadcrumbList, pageMetadata, pageUrl, STUDIO_ID, webPage } from "@/app/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/app/lib/site";
 import { JsonLd } from "@/app/components/json-ld";
 import type { Locale } from "@/i18n/routing";
@@ -27,6 +27,7 @@ export async function generateMetadata(
   if (!project) return { title: t("notFound") };
 
   const p = await getTranslations({ locale, namespace: `projects.${slug}` });
+  const page = await getTranslations({ locale, namespace: "projectPage" });
 
   const image = project.image?.[locale as Locale];
 
@@ -35,7 +36,9 @@ export async function generateMetadata(
     path: `/work/${slug}`,
     title: t("title", { client: p("client") }),
     description: p("summary"),
-    image: image ? { url: image, alt: p("client") } : undefined,
+    image: image
+      ? { url: image, alt: page("imageAlt", { client: p("client") }) }
+      : undefined,
   });
 }
 
@@ -74,6 +77,13 @@ export default async function ProjectPage(
         data={{
           "@context": "https://schema.org",
           "@graph": [
+            webPage({
+              locale,
+              path: `/work/${slug}`,
+              name: p("title"),
+              description: p("summary"),
+              extra: { mainEntity: { "@id": `${url}#case-study` } },
+            }),
             {
               "@type": "CreativeWork",
               "@id": `${url}#case-study`,
@@ -82,7 +92,7 @@ export default async function ProjectPage(
               description: p("summary"),
               abstract: p("challenge"),
               url,
-              mainEntityOfPage: url,
+              mainEntityOfPage: { "@id": `${url}#webpage` },
               inLanguage: locale,
               dateCreated: String(project.year),
               genre: c(project.category),
@@ -90,22 +100,15 @@ export default async function ProjectPage(
                 ", ",
               ),
               creativeWorkStatus: inDevelopment ? "Draft" : "Published",
-              creator: { "@id": `${SITE_URL}/#studio` },
+              creator: { "@id": STUDIO_ID },
               ...(image && { image: `${SITE_URL}${image}` }),
               ...(project.url && { sameAs: project.url[locale] }),
             },
-            {
-              "@type": "BreadcrumbList",
-              itemListElement: [
-                { name: SITE_NAME, item: pageUrl(locale) },
-                { name: nav("work"), item: pageUrl(locale, "/work") },
-                { name: p("client"), item: url },
-              ].map((crumb, crumbIndex) => ({
-                "@type": "ListItem",
-                position: crumbIndex + 1,
-                ...crumb,
-              })),
-            },
+            breadcrumbList([
+              { name: SITE_NAME, item: pageUrl(locale) },
+              { name: nav("work"), item: pageUrl(locale, "/work") },
+              { name: p("client"), item: url },
+            ]),
           ],
         }}
       />
@@ -148,7 +151,7 @@ export default async function ProjectPage(
         <Media
           seed={project.slug}
           src={project.image?.[locale]}
-          alt={p("client")}
+          alt={t("imageAlt", { client: p("client") })}
           preload
           motion="rise"
           className="h-[42vw] w-full max-md:h-[70vw]"

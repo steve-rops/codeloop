@@ -4,7 +4,6 @@ import { PROJECTS } from "../lib/projects";
 import { ProjectCard } from "./project-card";
 import { Reveal } from "./reveal";
 import { stagger } from "../lib/motion";
-import { italic } from "../lib/rich";
 
 export function Work() {
   const t = useTranslations("workSection");
