@@ -7,6 +7,15 @@ import type { Locale } from "@/i18n/routing";
 // locale here instead.
 export type Category = "ecommerce" | "saas" | "brand" | "webapp";
 
+/** One screenshot of an internal tool. The caption lives in the catalogues
+ * under `projects.<slug>.system.screens.<id>`. */
+export type Screen = {
+  id: string;
+  /** Shot under `public/`, taken of the app in each language. Until one is
+   * taken the slot shows a plate, so the section can ship before the shots. */
+  image?: Record<Locale, string>;
+};
+
 export type Project = {
   slug: string;
   year: number;
@@ -22,6 +31,11 @@ export type Project = {
    * carry an "under development" mark, and the results section, which has
    * nothing honest to report yet, is left out. */
   status?: "development";
+  /** A second phase shipped later under the same domain, such as an internal
+   * tool the client runs the business from. Its write-up lives under
+   * `projects.<slug>.system` in both catalogues; only the screenshots are keyed
+   * here. The case study gets an extra numbered section when this is set. */
+  system?: { screens: Screen[] };
 };
 
 // Shipped work. Add new case studies here and under `projects.<slug>` in both
@@ -33,7 +47,7 @@ export const PROJECTS: Project[] = [
     slug: "Marvelcars",
     year: 2025,
     category: "webapp",
-    stack: ["Next.js", "Sanity CMS", "TypeScript", "Tailwind", "GitHub"],
+    stack: ["Next.js", "Sanity CMS", "Supabase", "TypeScript", "Tailwind", "GitHub"],
     url: {
       en: "https://www.marvelcarsrentals.gr/en",
       el: "https://www.marvelcarsrentals.gr/el",
@@ -41,6 +55,20 @@ export const PROJECTS: Project[] = [
     image: {
       en: "/work/marvelcars-en.webp",
       el: "/work/marvelcars-en.webp",
+    },
+    // The booking management system the team runs the fleet from, added
+    // after launch under the same domain. One shot, a collage of the app's
+    // screens; the tool is Greek-only, so both locales share it.
+    system: {
+      screens: [
+        {
+          id: "overview",
+          image: {
+            en: "/work/marvelcars-booking-el.webp",
+            el: "/work/marvelcars-booking-el.webp",
+          },
+        },
+      ],
     },
   },
   {

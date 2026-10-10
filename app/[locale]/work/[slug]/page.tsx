@@ -64,6 +64,14 @@ export default async function ProjectPage(
     ? []
     : messagesList<{ label: string; value: string }>(p.raw("results"));
 
+  // The second-phase section is only there for projects that shipped one, so
+  // the sections are numbered as they render rather than in the catalogues.
+  const screens = project.system?.screens ?? [];
+  const number = (position: number) => String(position).padStart(2, "0");
+  const label = (position: number, text: string) =>
+    `${number(position)} \u2014 ${text}`;
+  const resultsPosition = screens.length > 0 ? 4 : 3;
+
   const index = PROJECTS.findIndex((entry) => entry.slug === project.slug);
   const next = PROJECTS[(index + 1) % PROJECTS.length];
 
@@ -198,7 +206,7 @@ export default async function ProjectPage(
       <Reveal as="section" className="gutter col-8 gap-y-[12vw] pt-[10vw] max-md:pt-[16vw]">
         <div className="col-span-3 max-md:col-span-4">
           <span className="mask">
-            <span className="a-up t-xs block text-muted">{t("problem")}</span>
+            <span className="a-up t-xs block text-muted">{label(1, t("problem"))}</span>
           </span>
           <p className="t-p a-fade-up mt-[2vw] max-md:mt-4" style={stagger(1, 0.08)}>
             {p("challenge")}
@@ -208,7 +216,7 @@ export default async function ProjectPage(
         <div className="col-span-4 col-start-5 max-md:col-span-4 max-md:col-start-1">
           <span className="mask">
             <span className="a-up t-xs block text-muted" style={stagger(1, 0.06)}>
-              {t("approach")}
+              {label(2, t("approach"))}
             </span>
           </span>
           <ol className="mt-[2vw] max-md:mt-4">
@@ -232,10 +240,127 @@ export default async function ProjectPage(
         </div>
       </Reveal>
 
+      {screens.length > 0 ? (
+        <Reveal as="section" className="gutter pt-[10vw] max-md:pt-[16vw]">
+          <span className="mask">
+            <span className="a-up t-xs block text-muted">
+              {label(3, p("system.label"))}
+            </span>
+          </span>
+
+          {screens.length === 1 ? (
+            /* A lone shot (a phone collage, taller than it is wide) takes the
+               right half at its own proportions, with the write-up beside it,
+               so the section reads as one spread rather than a page of text
+               followed by a tall image. */
+            <div className="col-8 mt-[2vw] gap-y-[3vw] max-md:mt-4 max-md:gap-y-8">
+              <div className="col-span-4 max-md:col-span-4">
+                <h2 className="t-m">
+                  <span className="mask">
+                    <span className="a-up block" style={stagger(1, 0.08)}>
+                      {p("system.title")}
+                    </span>
+                  </span>
+                </h2>
+                <p
+                  className="t-p a-fade-up mt-[3vw] max-w-[36ch] max-md:mt-4 max-md:max-w-none"
+                  style={stagger(2, 0.08)}
+                >
+                  {p("system.body")}
+                </p>
+              </div>
+              {screens.map((screen) => {
+                const caption = p(`system.screens.${screen.id}`);
+                return (
+                  <figure
+                    key={screen.id}
+                    className="col-span-3 col-start-6 max-md:col-span-4 max-md:col-start-1"
+                  >
+                    <Media
+                      seed={`${project.slug}-${screen.id}`}
+                      src={screen.image?.[locale]}
+                      alt={caption}
+                      sizes="(max-width: 768px) 100vw, 40vw"
+                      className="aspect-[707/1000] w-full"
+                    />
+                    <figcaption className="mt-[1vw] flex gap-[1.5vw] max-md:mt-3 max-md:gap-4">
+                      <span className="t-xxs shrink-0 text-muted">
+                        {number(1)}
+                      </span>
+                      <span
+                        className="t-xs a-fade-up text-muted"
+                        style={stagger(3, 0.06)}
+                      >
+                        {caption}
+                      </span>
+                    </figcaption>
+                  </figure>
+                );
+              })}
+            </div>
+          ) : (
+            <>
+              <div className="col-8 mt-[2vw] max-md:mt-4">
+                <h2 className="t-m col-span-4 max-md:col-span-4">
+                  <span className="mask">
+                    <span className="a-up block" style={stagger(1, 0.08)}>
+                      {p("system.title")}
+                    </span>
+                  </span>
+                </h2>
+                <p
+                  className="t-p a-fade-up col-span-3 col-start-6 max-md:col-span-4 max-md:col-start-1 max-md:mt-4"
+                  style={stagger(2, 0.08)}
+                >
+                  {p("system.body")}
+                </p>
+              </div>
+
+              {/* The first shot runs the full width like the cover; the rest
+                  pair up. Each slot falls back to a plate until its screenshot
+                  exists. */}
+              <div className="col-8 mt-[4vw] gap-y-[3vw] max-md:mt-8 max-md:gap-y-8">
+                {screens.map((screen, screenIndex) => {
+                  const caption = p(`system.screens.${screen.id}`);
+                  const wide = screenIndex === 0;
+                  return (
+                    <figure
+                      key={screen.id}
+                      className={`${wide ? "col-span-8" : "col-span-4"} max-md:col-span-4`}
+                    >
+                      <Media
+                        seed={`${project.slug}-${screen.id}`}
+                        src={screen.image?.[locale]}
+                        alt={caption}
+                        sizes={wide ? "100vw" : "(max-width: 768px) 100vw, 50vw"}
+                        className={`w-full ${wide ? "h-[42vw] max-md:h-[70vw]" : "h-[26vw] max-md:h-[70vw]"}`}
+                      />
+                      <figcaption className="mt-[1vw] flex gap-[1.5vw] max-md:mt-3 max-md:gap-4">
+                        <span className="t-xxs shrink-0 text-muted">
+                          {number(screenIndex + 1)}
+                        </span>
+                        <span
+                          className="t-xs a-fade-up text-muted"
+                          style={stagger(screenIndex + 3, 0.06)}
+                        >
+                          {caption}
+                        </span>
+                      </figcaption>
+                    </figure>
+                  );
+                })}
+              </div>
+            </>
+          )}
+        </Reveal>
+      ) : null}
+
       {results.length > 0 ? (
         <Reveal as="section" className="gutter pt-[10vw] max-md:pt-[16vw]">
           <span className="mask">
-            <span className="a-up t-xs block text-muted">{t("results")}</span>
+            <span className="a-up t-xs block text-muted">
+              {label(resultsPosition, t("results"))}
+            </span>
           </span>
 
           <div className="col-8 mt-[3vw] max-md:mt-6">

@@ -24,10 +24,10 @@ export const FEATURES = [
 ] as const;
 
 export const BUDGETS = [
-  { value: "under-5k" },
-  { value: "5-15k" },
-  { value: "15-40k" },
-  { value: "40k-plus" },
+  { value: "under-2k" },
+  { value: "2-5k" },
+  { value: "5-10k" },
+  { value: "10k-plus" },
   { value: "unsure" },
 ] as const;
 

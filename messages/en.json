@@ -301,9 +301,9 @@
     "duration": "Duration",
     "stack": "Stack",
     "website": "Website",
-    "problem": "01 — The problem",
-    "approach": "02 — What we did",
-    "results": "03 — What changed",
+    "problem": "The problem",
+    "approach": "What we did",
+    "results": "What changed",
     "nextProject": "Next project",
     "cta": "Start a project",
     "viewCase": "View case",
@@ -404,10 +404,10 @@
       "designSystem": "Design system"
     },
     "budgets": {
-      "under-5k": "Under $5k",
-      "5-15k": "$5k – $15k",
-      "15-40k": "$15k – $40k",
-      "40k-plus": "$40k+",
+      "under-2k": "Under €2k",
+      "2-5k": "€2k – €5k",
+      "5-10k": "€5k – €10k",
+      "10k-plus": "€10k+",
       "unsure": "Not sure yet"
     },
     "timelines": {
@@ -447,20 +447,29 @@
     "Marvelcars": {
       "client": "Marvelcarsrentals",
       "title": "27 luxury cars, picked and reserved in minutes",
-      "summary": "A bilingual rental site for Marvel Cars Athens: fleet, day rates and handover points laid out so a visitor picks a car and reserves it in minutes.",
+      "summary": "A bilingual rental site for Marvel Cars Athens: fleet, day rates and handover points laid out so a visitor picks a car and reserves it in minutes, and behind it the booking system the team runs every reservation from.",
       "role": "Design & development",
       "duration": "2 months",
       "challenge": "Marvel Cars hires out 27 luxury and performance cars from three points on the Athens Riviera, and most customers arrive by plane or ferry and book from a phone. The site had to show the right car, its real all-in price and where to collect it in two languages, without a developer in the loop every time the fleet changed.",
       "tags": {
         "0": "Web design",
         "1": "Development",
-        "2": "Headless CMS"
+        "2": "Headless CMS",
+        "3": "Booking system"
       },
       "approach": {
         "0": "Modelled the fleet in Sanity so cars, categories, day rates and photos are edited by the team, not by us.",
         "1": "Grouped the fleet into SUVs, sportscars and daily rentals, with VAT, collision cover and liability shown in the price up front.",
         "2": "Built the whole site in English and Greek, with its own route and metadata per language.",
         "3": "Added landing pages for airport arrivals, ferry ports, the Riviera, weddings and corporate hire, each ending in the same reservation flow."
+      },
+      "system": {
+        "label": "The booking system",
+        "title": "One place to run every reservation",
+        "body": "With inquiries up, keeping track of them by hand became the bottleneck: which car is out, who collects it where, what has been handed over. So we built the team a booking management system under the same domain. Every reservation sits on one calendar against the car it is for, so a date that is already taken cannot be booked twice. Each booking carries its customer, its pickup and return points and the handover details, so whoever is at the airport has everything on a phone and nothing is copied over by hand.",
+        "screens": {
+          "overview": "The calendar, availability by car and the day's pickups and returns, on the team's phones."
+        }
       },
       "results": {
         "0": {
@@ -667,7 +676,7 @@
     "items": {
       "0": {
         "q": "How much does a website cost?",
-        "a": "Most marketing sites we build land between $5k and $15k. E-shops, booking sites and web apps start higher because of the integrations. The brief asks for a budget range and we scope the project to fit it, rather than quoting a number and squeezing the work afterwards."
+        "a": "Marketing sites start from €800 and go up with the number of pages, languages and features. E-shops, booking sites and web apps start higher because of the integrations. The brief asks for a budget range and we scope the project to fit it, rather than quoting a number and squeezing the work afterwards."
       },
       "1": {
         "q": "How long does it take?",
