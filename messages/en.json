@@ -575,10 +575,10 @@
     "Evresis": {
       "client": "Evresis",
       "title": "Property across northern Evros, searched from one bar",
-      "summary": "A bilingual site for Evresis, a real estate agency in Orestiada: homes, commercial spaces and land for sale and rent, alongside the office's print works and building management. Currently in development.",
+      "summary": "A bilingual site for Evresis, a real estate agency in Orestiada: homes, commercial spaces and land for sale and rent, alongside the office's print works and building management.",
       "role": "Design & development",
-      "duration": "In progress",
-      "challenge": "Evresis sells and lets homes, commercial spaces and land in Nea Orestiada, Didymoteicho, Soufli and the villages of northern Evros, and runs a print works and a building management service from the same office. The site has to let a buyer or tenant narrow the portfolio by area, type and price in one step, give the two other services room of their own, and leave the agency able to publish and retire listings without a developer.",
+      "duration": "1 month",
+      "challenge": "Evresis sells and lets homes, commercial spaces and land in Nea Orestiada, Didymoteicho, Soufli and the villages of northern Evros, and runs a print works and a building management service from the same office. The site had to let a buyer or tenant narrow the portfolio by area, type and price in one step, give the two other services room of their own, and leave the agency able to publish and retire listings without a developer.",
       "tags": {
         "0": "Web design",
         "1": "Development",
@@ -591,6 +591,16 @@
         "2": "Set that search over a Mapbox map of Orestiada, so the agency's own streets are the first thing a visitor sees.",
         "3": "Modelled the listings in Sanity, so the agency adds, edits and retires properties itself.",
         "4": "Gave the print works and building management their own pages, so the office's two other services aren't buried under the listings."
+      },
+      "results": {
+        "0": {
+          "label": "Property search",
+          "value": "Area, type & price in one bar"
+        },
+        "1": {
+          "label": "Site languages",
+          "value": "Greek & English"
+        }
       }
     }
   },

@@ -117,22 +117,19 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    // https://evresis.vercel.app — real estate agency, Orestiada, Evros.
-    // Preview deployment; swap the URLs for the client's domain at launch and
-    // add `results` to both catalogues when dropping `status`.
+    // https://evresismesitiko.gr — real estate agency, Orestiada, Evros.
     slug: "Evresis",
     year: 2026,
     category: "webapp",
     stack: ["Next.js", "Sanity CMS", "TypeScript", "Tailwind", "Mapbox", "GitHub"],
     url: {
-      en: "https://evresis.vercel.app/en",
-      el: "https://evresis.vercel.app/el",
+      en: "https://evresismesitiko.gr/en",
+      el: "https://evresismesitiko.gr/el",
     },
     image: {
-      en: "/work/evresis-en.webp",
-      el: "/work/evresis-en.webp",
+      en: "/work/evresis-el.webp",
+      el: "/work/evresis-el.webp",
     },
-    status: "development",
   },
 ];
 
