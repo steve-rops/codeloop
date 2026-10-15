@@ -64,7 +64,8 @@
     "role": "Freelance studio",
     "location": "Remote, worldwide",
     "lead": "We design and build websites that feel as good to use as they look.",
-    "cta": "Start a project"
+    "cta": "Start a project",
+    "ctaWork": "See our work"
   },
   "services": {
     "eyebrow": "01 — Services",
@@ -98,7 +99,7 @@
         "faq": {
           "0": {
             "q": "Do you design in Figma?",
-            "a": "Yes. Wireframes and UI live in Figma, and you get the file. Because we also build the site, the design is reviewed as working pages in a browser from the second week, not only as flat screens."
+            "a": "Yes, if the client asks for it. There are several design tools, and Figma is one of the ones we use."
           },
           "1": {
             "q": "Can you design only, and hand it to another developer?",
@@ -113,7 +114,7 @@
       "development": {
         "title": "Development",
         "desc": "Fast, accessible builds in modern frameworks, shipped and maintained end to end.",
-        "intro": "We build with Next.js, React and TypeScript, with content in a headless CMS such as Sanity so your team edits pages, products and prices without a developer. Every site ships with the technical SEO in place: semantic HTML, metadata and structured data per page and per language, fast loading on a phone, and accessibility checked before launch.",
+        "intro": "We build with Next.js, React and TypeScript, with content in a headless CMS such as Sanity so your team edits pages, products and prices without a developer, and Postgres databases such as Supabase and Neon when the site needs to store data. Every site ships with the technical SEO in place: semantic HTML, metadata and structured data per page and per language, fast loading on a phone, and accessibility checked before launch.",
         "deliverables": {
           "0": "Front-end build in Next.js and TypeScript",
           "1": "Headless CMS set-up and editor training",
@@ -144,7 +145,7 @@
           },
           "2": {
             "q": "Who hosts the site and what does it cost?",
-            "a": "Sites run on Vercel, on your own account so you own everything. Most sites fit within the free or the lowest paid tier; the CMS has a free tier too."
+            "a": "Sites run on Vercel. Depending on the project, hosting costs from €0 to around €20 per month."
           },
           "3": {
             "q": "Do you maintain sites after launch?",
@@ -258,7 +259,7 @@
   "contactPage": {
     "eyebrow": "Contact",
     "title": "Let's <i>talk</i> about it.",
-    "intro": "Send a note and you'll hear back from a person within a working day — no forms disappearing into a void.",
+    "intro": "Send a note and you'll hear back from us within a working day.",
     "step01": "01 — Send a message",
     "step02": "02 — The details",
     "details": {
@@ -578,7 +579,7 @@
       "summary": "A bilingual site for Evresis, a real estate agency in Orestiada: homes, commercial spaces and land for sale and rent, alongside the office's print works and building management.",
       "role": "Design & development",
       "duration": "1 month",
-      "challenge": "Evresis sells and lets homes, commercial spaces and land in Nea Orestiada, Didymoteicho, Soufli and the villages of northern Evros, and runs a print works and a building management service from the same office. The site had to let a buyer or tenant narrow the portfolio by area, type and price in one step, give the two other services room of their own, and leave the agency able to publish and retire listings without a developer.",
+      "challenge": "Evresis is a real estate agency based in Nea Orestiada. It handles sales and lettings of homes, commercial spaces and land across northern Evros, and runs a print works and an apartment building management service from the same office. The site had to let a buyer or tenant narrow the portfolio by area, type and price in one step, give the two other services room of their own, and leave the agency able to publish and retire listings without a developer.",
       "tags": {
         "0": "Web design",
         "1": "Development",
@@ -650,7 +651,7 @@
       }
     },
     "stackTitle": "03 — Tools",
-    "stackBody": "Next.js, React and TypeScript for the front end, Tailwind for styling, Sanity as the headless CMS, Vercel for hosting, Figma for design.",
+    "stackBody": "Next.js, React and TypeScript for the front end, Tailwind for styling, Sanity as the headless CMS, Supabase and Neon for Postgres databases, Vercel for hosting, Figma for design.",
     "factsTitle": "04 — In short",
     "facts": {
       "based": {
@@ -690,7 +691,7 @@
       },
       "1": {
         "q": "How long does it take?",
-        "a": "A design-and-build engagement runs six to twelve weeks. If the scope is unclear, a two-week discovery sprint comes first and ends with a fixed estimate. Small sites can launch in a month."
+        "a": "A design-and-build engagement runs from one week to about two months, depending on the functionality and complexity of the project."
       },
       "2": {
         "q": "Do you work with clients outside Athens?",
@@ -698,7 +699,7 @@
       },
       "3": {
         "q": "What do you build websites with?",
-        "a": "Next.js, React and TypeScript, with Tailwind for styling and Sanity as the headless CMS. Sites are hosted on Vercel. The result is a site that loads fast, scores well on Core Web Vitals and does not need plugin updates."
+        "a": "Next.js, React and TypeScript, with Tailwind for styling, Sanity as the headless CMS and Postgres databases such as Supabase and Neon. Sites are hosted on Vercel. The result is a site that loads fast, scores well on Core Web Vitals and does not need plugin updates."
       },
       "4": {
         "q": "Can I update the site myself after launch?",

@@ -61,12 +61,12 @@ export default function ContactPage() {
         intro={t("intro")}
       />
 
-      <Reveal as="section" className="gutter col-8 gap-y-[5vw] pb-[6vw]">
+      <Reveal as="section" className="gutter col-8 gap-y-[8vw] pb-[9vw] max-md:gap-y-24 max-md:pb-28">
         <div className="col-span-4 max-md:col-span-4">
           <span className="mask">
             <span className="a-up t-xs block text-muted">{t("step01")}</span>
           </span>
-          <div className="a-fade-up mt-[2.5vw]" style={stagger(1, 0.08)}>
+          <div className="a-fade-up mt-[3vw] max-md:mt-7" style={stagger(1, 0.08)}>
             <ContactForm />
           </div>
         </div>
@@ -78,10 +78,10 @@ export default function ContactPage() {
             </span>
           </span>
 
-          <dl className="mt-[2.5vw]">
+          <dl className="mt-[1vw] max-md:mt-0">
             {DETAILS.map((detail, index) => (
-              <div key={detail} className="border-hairline border-b py-[1.2vw] max-md:py-4">
-                <dt className="t-xxs mb-[0.5vw] text-muted">
+              <div key={detail} className="border-hairline border-b py-[2vw] max-md:py-7">
+                <dt className="t-xxs mb-[0.5vw] text-muted max-md:mb-2">
                   {t(`details.${detail}.label`)}
                 </dt>
                 <dd className="mask">
@@ -96,7 +96,7 @@ export default function ContactPage() {
             ))}
           </dl>
 
-          <div className="theme-sand a-fade-up mt-[3vw] p-[2vw] max-md:p-6" style={stagger(5, 0.06)}>
+          <div className="theme-sand a-fade-up mt-[5vw] p-[2vw] max-md:mt-16 max-md:p-6" style={stagger(5, 0.06)}>
             <p className="t-s mb-[1vw]">{t.rich("brief.title", italic)}</p>
             <p className="t-p mb-[2vw]">{t("brief.body")}</p>
             <PillButton href="/new">{t("brief.cta")}</PillButton>

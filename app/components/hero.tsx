@@ -34,7 +34,7 @@ export function Hero() {
         <h1 className=" t-xl col-span-8 w-[86%] max-md:w-full">
           <FitLines
             className="mask"
-            groundClassName="bg-white/10 w-fit md:backdrop-blur-sm"
+            groundClassName="bg-white/10 w-fit backdrop-blur-sm"
           >
             <span className="a-up w-fit block" style={delay(0.1)}>
               {t("line1")}
@@ -42,7 +42,7 @@ export function Hero() {
           </FitLines>{" "}
           <FitLines
             className="mask"
-            groundClassName="bg-white/10 w-fit md:backdrop-blur-sm"
+            groundClassName="bg-white/10 w-fit backdrop-blur-sm"
           >
             <span className="a-up w-fit block t-ml" style={delay(0.19)}>
               {t("line2")}
@@ -70,14 +70,19 @@ export function Hero() {
               patch is a descendant of the z-10 content, so it clears the
               footage while staying under the text it is there to hold up. */}
 
-          <h2
+          {/* <h2
             className="t-s a-fade-up mb-[var(--stack-y)] max-w-108 "
             style={delay(0.5)}
           >
             {t.rich("lead", italic)}
-          </h2>
-          <div className="a-fade-up" style={delay(0.6)}>
-            <PillButton href="/new">{t("cta")}</PillButton>
+          </h2> */}
+          <div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-4">
+            <div className="a-fade-up" style={delay(0.6)}>
+              <PillButton href="/new">{t("cta")}</PillButton>
+            </div>
+            <div className="a-fade-up" style={delay(0.7)}>
+              <PillButton href="/work" variant="secondary">{t("ctaWork")}</PillButton>
+            </div>
           </div>
         </div>
       </div>

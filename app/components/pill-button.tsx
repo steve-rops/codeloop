@@ -34,14 +34,18 @@ function PillInner({
 export function PillButton({
   href,
   children,
+  variant = "primary",
   className = "",
 }: {
   href: string;
   children: ReactNode;
+  variant?: "primary" | "secondary";
   className?: string;
 }) {
+  const variantClass = variant === "secondary" ? "btn-secondary" : "";
+
   return (
-    <Link href={href} className={`btn ${className}`}>
+    <Link href={href} className={`btn ${variantClass} ${className}`}>
       <PillInner className="p-2">{children}</PillInner>
     </Link>
   );

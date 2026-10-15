@@ -576,6 +576,23 @@
     text-transform: uppercase;
   }
 
+  /* Secondary: a frosted pill with an ink outline at rest, so it reads as the
+     quieter of two actions; the hover still rolls to sand like the primary.
+     The ring sits on its own layer above the moving ones so it stays put. */
+  .btn-secondary .btn-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px var(--color-ink);
+    pointer-events: none;
+  }
+  .btn-secondary .btn-top {
+    background-color: color-mix(in srgb, var(--color-paper) 60%, transparent);
+    color: var(--color-ink);
+    backdrop-filter: blur(4px);
+  }
+
   .on-dark .btn-top {
     background-color: var(--color-sand);
     color: var(--color-ink);

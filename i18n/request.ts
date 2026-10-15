@@ -14,13 +14,14 @@ import { routing } from "./routing";
  * `requestLocale` param the older guides use is deprecated in favour of this.
  */
 export default getRequestConfig(async ({ locale }) => {
-  if (!locale) {
-    // The segment is effectively a catch-all, so anything that isn't a locale
-    // we support (/wp-login, /en-GB, junk) lands here as a 404.
-    const paramValue = await rootParams.locale();
-    if (!hasLocale(routing.locales, paramValue)) notFound();
-    locale = paramValue;
-  }
+  locale ??= await rootParams.locale();
+
+  // The segment is effectively a catch-all, so anything that isn't a locale we
+  // support (/wp-login, /en-GB, /.well-known/…, junk) lands here as a 404. This
+  // has to cover the explicit `locale` too: call sites pass the raw `[locale]`
+  // param straight through, and generateMetadata runs before the layout's own
+  // guard does — unchecked, it reaches the import below as a file path.
+  if (!hasLocale(routing.locales, locale)) notFound();
 
   return {
     locale,
