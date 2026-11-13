@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL, SITE_NAME } from "./site";
+import { SITE_NAME } from "./site";
 
 /**
  * The site-wide maintenance switch. While it is on, the proxy answers every
@@ -53,8 +53,6 @@ export const MAINTENANCE_HTML = `<!doctype html>
     margin-top:clamp(32px,5vw,72px);max-width:960px;font-size:clamp(16px,1.3vw,20px);line-height:1.45}
   .copy p span{display:block;font-size:12px;font-weight:500;text-transform:uppercase;
     letter-spacing:.04em;color:#949494;margin-bottom:8px}
-  a{color:inherit;text-decoration:none;border-bottom:1px solid #d6d6d6;transition:border-color .2s}
-  a:hover{border-color:#2a2a2a}
   .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:8px;
     background:linear-gradient(135deg,#06b6d4,#a855f7);animation:pulse 2s ease-in-out infinite}
   footer{color:#949494}
@@ -70,13 +68,12 @@ export const MAINTENANCE_HTML = `<!doctype html>
   <main>
     <h1>Back <em>very</em><br>soon</h1>
     <div class="copy">
-      <p lang="en"><span>EN</span>We're making some improvements to the site. It will be back shortly &mdash; in the meantime, reach us at <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.</p>
-      <p lang="el"><span>EL</span>Κάνουμε κάποιες βελτιώσεις στον ιστότοπο. Θα επιστρέψουμε σύντομα &mdash; στο μεταξύ, επικοινωνήστε μαζί μας στο <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.</p>
+      <p lang="en"><span>EN</span>We're making some improvements to the site. It will be back shortly.</p>
+      <p lang="el"><span>EL</span>Κάνουμε κάποιες βελτιώσεις στον ιστότοπο. Θα επιστρέψουμε σύντομα.</p>
     </div>
   </main>
   <footer>
     <div>&copy; ${new Date().getFullYear()} ${SITE_NAME}</div>
-    <div><a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a></div>
   </footer>
 </body>
 </html>`;
